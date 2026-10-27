@@ -56,6 +56,38 @@ Otros comandos: `npm run user -- list`, `npm run user -- password <usuario>`.
 Los demás usuarios se crean desde la app: **Ajustes → Cuenta → Administrar usuarios**.
 Detalles de diseño en `docs/arquitectura-servidor.md`.
 
+## Actualizar el servidor (kuentu.minttu.cl)
+
+Kuentu está instalado en `/var/www/kuentu-app` (servicio `kuentu-api`, puerto interno 3100, base PostgreSQL `kuentu`).
+Guía de instalación completa en `docs/despliegue.md`.
+
+**1. En tu PC**, sube los cambios:
+
+```bash
+cd /mnt/d/Proyectos/Proloquo
+git add -A && git commit -m "Describe el cambio" && git push
+```
+
+**2. En el servidor**, baja los cambios, compila y reinicia:
+
+```bash
+cd /var/www/kuentu-app && bash deploy/actualizar.sh
+```
+
+El script hace: `git pull`, instala dependencias (sin Electron), `npm run build`, instala las del servidor y
+reinicia `kuentu-api`. Los usuarios ven la versión nueva al recargar la página (o al volver a abrir la app instalada).
+Los tableros guardados no se tocan: viven en la base de datos.
+
+Comandos útiles en el servidor:
+
+```bash
+sudo systemctl status kuentu-api        # ¿está corriendo?
+journalctl -u kuentu-api -n 50          # últimos registros (errores)
+curl http://127.0.0.1:3100/api/health   # → {"ok":true}
+cd /var/www/kuentu-app/server && node --env-file=.env src/cli.ts list                 # usuarios
+cd /var/www/kuentu-app/server && node --env-file=.env src/cli.ts password <usuario>   # cambiar contraseña
+```
+
 ## Programa de escritorio (Windows, Mac, Linux)
 
 La app de escritorio usa Electron e incluye los pictogramas (`public/pictos/`), así funciona sin internet.
