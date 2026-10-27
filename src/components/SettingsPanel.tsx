@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import type { AppData, Settings } from '../lib/types'
 import { onVoicesChanged, sortVoices, speak, speechSupported, type VoiceInfo } from '../lib/speech'
 import { exportBackup, importBackup } from '../lib/store'
-import type { Account } from '../lib/account'
+import { isInstalledApp, type Account } from '../lib/account'
 import type { SyncStatus } from '../lib/sync'
 
 interface Props {
@@ -16,6 +16,7 @@ interface Props {
   onLogout: () => void
   onChangePassword: () => void
   onOpenAdmin: () => void
+  onLogin: () => void
 }
 
 const SYNC_TEXT: Record<SyncStatus, string> = {
@@ -42,6 +43,20 @@ export function SettingsPanel(props: Props) {
         </div>
 
         <div className="editor-body">
+          {!account && isInstalledApp && (
+            <>
+              <h3>Cuenta</h3>
+              <p className="muted small">
+                Usando sin cuenta: todo se guarda solo en este dispositivo. Con una cuenta, tu tablero queda guardado en el
+                servidor y lo puedes usar en otros dispositivos.
+              </p>
+              <div className="row-buttons">
+                <button type="button" className="btn btn-primary" onClick={props.onLogin}>
+                  Iniciar sesión
+                </button>
+              </div>
+            </>
+          )}
           {account && (
             <>
               <h3>Cuenta</h3>

@@ -43,9 +43,11 @@ interface AppProps {
   /** Cuenta con sesión iniciada, o null si la app funciona solo en este dispositivo. */
   account: Account | null
   onLogout: () => void
+  /** Pasar de usar la app sin cuenta a iniciar sesión (app instalada). */
+  onLogin: () => void
 }
 
-export default function App({ account, onLogout }: AppProps) {
+export default function App({ account, onLogout, onLogin }: AppProps) {
   const [data, setData] = useState<AppData | null>(null)
   const [stack, setStack] = useState<string[]>(['home'])
   const [popup, setPopup] = useState<string | null>(null)
@@ -528,6 +530,7 @@ export default function App({ account, onLogout }: AppProps) {
           onLogout={doLogout}
           onChangePassword={doChangePassword}
           onOpenAdmin={() => setPanel('admin')}
+          onLogin={onLogin}
           onChange={updateSettings}
           onReplaceData={(d) => {
             setData(d)

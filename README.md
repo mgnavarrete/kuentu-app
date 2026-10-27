@@ -39,7 +39,7 @@ Para instalarla en un celular como app y usarla sin conexión, hay que publicarl
 
 La versión web puede usarse con cuentas: cada usuario entra con su usuario y contraseña y su tablero
 se guarda en PostgreSQL (también queda una copia en el dispositivo para usarla sin internet).
-Sin servidor, la app funciona igual que antes, guardando todo en el dispositivo. Windows y Android funcionan así por ahora.
+Sin servidor, la app funciona igual que antes, guardando todo en el dispositivo. Las apps de Windows y Android se conectan a `https://kuentu.minttu.cl` (o se usan sin cuenta, a elección).
 
 Probar en local (necesita Docker para la base de datos):
 

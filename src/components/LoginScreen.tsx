@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from 'react'
-import { login, type Account } from '../lib/account'
+import { isInstalledApp, login, type Account } from '../lib/account'
 
-export function LoginScreen({ onLogin }: { onLogin: (account: Account) => void }) {
+export function LoginScreen({ onLogin, onUseLocal }: { onLogin: (account: Account) => void; onUseLocal: () => void }) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
@@ -49,6 +49,11 @@ export function LoginScreen({ onLogin }: { onLogin: (account: Account) => void }
           {busy ? 'Entrando…' : 'Entrar'}
         </button>
         <p className="muted small login-help">¿No tienes cuenta? Pídela a quien administra Kuentu.</p>
+        {isInstalledApp && (
+          <button type="button" className="btn btn-ghost login-local" onClick={onUseLocal}>
+            Usar sin cuenta (solo en este dispositivo)
+          </button>
+        )}
       </form>
     </div>
   )

@@ -1198,3 +1198,8 @@ button {
   flex-wrap: wrap;
   gap: 6px;
 }
+
+.login-local {
+  margin-top: 4px;
+  font-size: 14px;
+}

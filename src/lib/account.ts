@@ -17,8 +17,40 @@ export interface AdminUser extends Account {
 }
 
 /**
+ * App instalada (Android o Windows): trae la app adentro y se conecta al servidor de Kuentu por internet,
+ * identificándose con un token. En la web, la app y la API están en el mismo dominio y se usa una cookie.
+ */
+export const isInstalledApp = Capacitor.isNativePlatform() || location.protocol === 'file:'
+const SERVER = (import.meta.env.VITE_SERVER_URL as string | undefined) ?? 'https://kuentu.minttu.cl'
+const API_BASE = isInstalledApp ? `${SERVER}/api/` : './api/'
+
+const TOKEN = 'kuentu:token'
+// En la app instalada se puede elegir usarla sin cuenta; se recuerda la elección.
+const LOCAL_MODE = 'kuentu:local'
+
+function storageGet(key: string): string | null {
+  try {
+    return localStorage.getItem(key)
+  } catch {
+    return null
+  }
+}
+
+function storageSet(key: string, value: string | null) {
+  try {
+    if (value === null) localStorage.removeItem(key)
+    else localStorage.setItem(key, value)
+  } catch {}
+}
+
+/** Usar la app instalada sin cuenta (todo en el dispositivo), o volver a pedir inicio de sesión. */
+export function setLocalMode(on: boolean) {
+  storageSet(LOCAL_MODE, on ? '1' : null)
+}
+
+/**
  * Cómo arranca la app:
- * - local: sin servidor (Windows, Android, o web publicada sin backend). Todo queda en el dispositivo.
+ * - local: todo queda en el dispositivo (app instalada sin cuenta, o web publicada sin servidor).
  * - login: hay servidor y no hay sesión.
  * - user: sesión iniciada. `offline` si el servidor no respondió y se usa la última cuenta guardada.
  */
@@ -35,10 +67,14 @@ export class ApiError extends Error {
 }
 
 async function api<T>(path: string, init: { method?: string; body?: unknown } = {}): Promise<T> {
-  const res = await fetch(`./api/${path}`, {
+  const headers: Record<string, string> = { 'x-kuentu': '1' }
+  if (init.body !== undefined) headers['content-type'] = 'application/json'
+  const token = isInstalledApp ? storageGet(TOKEN) : null
+  if (token) headers.authorization = `Bearer ${token}`
+  const res = await fetch(API_BASE + path, {
     method: init.method ?? 'GET',
-    credentials: 'same-origin',
-    headers: init.body !== undefined ? { 'content-type': 'application/json', 'x-kuentu': '1' } : { 'x-kuentu': '1' },
+    credentials: isInstalledApp ? 'omit' : 'same-origin',
+    headers,
     body: init.body !== undefined ? JSON.stringify(init.body) : undefined,
   })
   const isJson = res.headers.get('content-type')?.includes('application/json')
@@ -53,22 +89,23 @@ async function api<T>(path: string, init: { method?: string; body?: unknown } = 
 const LAST_ACCOUNT = 'kuentu:account'
 
 function rememberAccount(account: Account | null) {
-  try {
-    if (account) localStorage.setItem(LAST_ACCOUNT, JSON.stringify(account))
-    else localStorage.removeItem(LAST_ACCOUNT)
-  } catch {}
+  storageSet(LAST_ACCOUNT, account ? JSON.stringify(account) : null)
 }
 
 function lastAccount(): Account | null {
   try {
-    return JSON.parse(localStorage.getItem(LAST_ACCOUNT) ?? 'null')
+    return JSON.parse(storageGet(LAST_ACCOUNT) ?? 'null')
   } catch {
     return null
   }
 }
 
 export async function checkSession(): Promise<Session> {
-  if (Capacitor.isNativePlatform() || !location.protocol.startsWith('http')) return { kind: 'local' }
+  if (isInstalledApp) {
+    if (!storageGet(TOKEN)) return storageGet(LOCAL_MODE) ? { kind: 'local' } : { kind: 'login' }
+  } else if (!location.protocol.startsWith('http')) {
+    return { kind: 'local' }
+  }
   try {
     const { user } = await api<{ user: Account }>('me')
     rememberAccount(user)
@@ -76,6 +113,7 @@ export async function checkSession(): Promise<Session> {
   } catch (err) {
     if (err instanceof ApiError && err.status === 401) {
       rememberAccount(null)
+      storageSet(TOKEN, null)
       return { kind: 'login' }
     }
     // El servidor no respondió: si ya había alguien con sesión, se sigue con su copia local.
@@ -85,7 +123,12 @@ export async function checkSession(): Promise<Session> {
 }
 
 export async function login(username: string, password: string): Promise<Account> {
-  const { user } = await api<{ user: Account }>('login', { method: 'POST', body: { username, password } })
+  const { user, token } = await api<{ user: Account; token?: string }>('login', {
+    method: 'POST',
+    body: isInstalledApp ? { username, password, client: 'app' } : { username, password },
+  })
+  if (token) storageSet(TOKEN, token)
+  setLocalMode(false)
   rememberAccount(user)
   return user
 }
@@ -93,6 +136,7 @@ export async function login(username: string, password: string): Promise<Account
 export async function logout(): Promise<void> {
   rememberAccount(null)
   await api('logout', { method: 'POST', body: {} }).catch(() => {})
+  storageSet(TOKEN, null)
 }
 
 export function changePassword(current: string, password: string) {

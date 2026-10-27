@@ -32,6 +32,21 @@ declare module 'fastify' {
   }
 }
 
+// Apps instaladas (Android, Windows): llaman desde otro origen y se identifican con un token
+// (Authorization: Bearer), nunca con la cookie. Por eso CORS abierto sin credenciales es seguro:
+// otro sitio puede hacer la petición, pero sin token no está autenticada.
+app.addHook('onRequest', async (req, reply) => {
+  if (!req.headers.origin) return
+  reply.header('Access-Control-Allow-Origin', '*')
+  reply.header('Vary', 'Origin')
+  if (req.method === 'OPTIONS') {
+    reply.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE')
+    reply.header('Access-Control-Allow-Headers', 'Authorization, Content-Type, X-Kuentu')
+    reply.header('Access-Control-Max-Age', '86400')
+    return reply.code(204).send()
+  }
+})
+
 // Protección CSRF: toda petición que modifica algo debe traer este encabezado, que un formulario
 // de otro sitio no puede enviar sin permiso (junto con la cookie SameSite=Lax).
 app.addHook('onRequest', async (req, reply) => {
@@ -40,8 +55,15 @@ app.addHook('onRequest', async (req, reply) => {
   }
 })
 
+/** Token de sesión: de la cabecera Authorization (apps) o de la cookie (web). */
+function sessionToken(req: FastifyRequest): string | undefined {
+  const auth = req.headers.authorization
+  if (auth?.startsWith('Bearer ')) return auth.slice(7)
+  return req.cookies[SESSION_COOKIE]
+}
+
 async function requireUser(req: FastifyRequest, reply: FastifyReply) {
-  const user = await userFromSession(req.cookies[SESSION_COOKIE])
+  const user = await userFromSession(sessionToken(req))
   if (!user) return reply.code(401).send({ error: 'Inicia sesión' })
   req.user = user
 }
@@ -56,14 +78,18 @@ app.get('/api/health', async () => ({ ok: true }))
 
 // --- Sesión ---
 
-app.post<{ Body: { username: string; password: string } }>(
+app.post<{ Body: { username: string; password: string; client?: 'app' } }>(
   '/api/login',
   {
     schema: {
       body: {
         type: 'object',
         required: ['username', 'password'],
-        properties: { username: { type: 'string', maxLength: 64 }, password: { type: 'string', maxLength: 200 } },
+        properties: {
+          username: { type: 'string', maxLength: 64 },
+          password: { type: 'string', maxLength: 200 },
+          client: { type: 'string', enum: ['app'] },
+        },
       },
     },
   },
@@ -82,6 +108,8 @@ app.post<{ Body: { username: string; password: string } }>(
     clearFailures(key)
     const token = await createSession(user.id, req.headers['user-agent'] ?? '')
     await pool.query('UPDATE users SET last_login_at = now() WHERE id = $1', [user.id])
+    // Las apps instaladas guardan el token ellas mismas; la web lo recibe en una cookie httpOnly.
+    if (req.body.client === 'app') return { user: publicUser(user), token }
     reply.setCookie(SESSION_COOKIE, token, {
       httpOnly: true,
       secure: COOKIE_SECURE,
@@ -94,7 +122,7 @@ app.post<{ Body: { username: string; password: string } }>(
 )
 
 app.post('/api/logout', async (req, reply) => {
-  await deleteSession(req.cookies[SESSION_COOKIE])
+  await deleteSession(sessionToken(req))
   reply.clearCookie(SESSION_COOKIE, { path: '/' })
   return { ok: true }
 })

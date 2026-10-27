@@ -67,8 +67,8 @@ export class Sync {
         this.onStatus('saved')
         return data
       }
-      // Cuenta nueva: se parte con lo local (o el vocabulario original) y se sube.
-      const data = local ?? defaultData()
+      // Cuenta nueva: se parte con lo de este dispositivo (lo que se usó sin cuenta, si hay) y se sube.
+      const data = local ?? (await loadLocal()) ?? defaultData()
       this.meta = { version: remote.version, dirty: true }
       this.latest = data
       this.schedule(0)
