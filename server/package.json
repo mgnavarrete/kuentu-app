@@ -1,0 +1,26 @@
+{
+  "name": "kuentu-server",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Servidor de Kuentu: cuentas de usuario y tableros guardados en PostgreSQL.",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "dev": "node --watch --env-file-if-exists=.env src/index.ts",
+    "start": "node --env-file-if-exists=.env src/index.ts",
+    "check": "tsc --noEmit",
+    "user": "node --env-file-if-exists=.env src/cli.ts"
+  },
+  "dependencies": {
+    "@fastify/cookie": "11.0.2",
+    "fastify": "5.2.1",
+    "pg": "8.13.1"
+  },
+  "devDependencies": {
+    "@types/node": "22.13.10",
+    "@types/pg": "8.11.11",
+    "typescript": "5.8.3"
+  }
+}

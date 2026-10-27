@@ -1,0 +1,11 @@
+node_modules
+dist
+dev-dist
+*.log
+scripts/.picto-cache.json
+release
+*.tsbuildinfo
+.env
+# Firma de Android: nunca al repositorio (respaldarlas aparte)
+*.jks
+keystore.properties

@@ -1,0 +1,22 @@
+# Servicio systemd del servidor de Kuentu.
+# Copiar a /etc/systemd/system/kuentu-api.service y ajustar la ruta de node (`which node`).
+[Unit]
+Description=Kuentu API
+After=network.target postgresql.service
+
+[Service]
+Type=simple
+User=kuentu
+WorkingDirectory=/opt/kuentu/server
+ExecStart=/usr/bin/node --env-file=.env src/index.ts
+Restart=on-failure
+RestartSec=3
+Environment=NODE_ENV=production
+# Endurecimiento: el proceso no puede escribir fuera de lo necesario.
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

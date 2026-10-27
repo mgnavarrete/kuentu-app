@@ -1,0 +1,17 @@
+# Base de datos para desarrollo local: `npm run db:up`
+name: kuentu
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: kuentu
+      POSTGRES_PASSWORD: kuentu
+      POSTGRES_DB: kuentu
+    ports:
+      - '127.0.0.1:5432:5432'
+    volumes:
+      - kuentu-db:/var/lib/postgresql/data
+
+volumes:
+  kuentu-db:

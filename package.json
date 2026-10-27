@@ -1,0 +1,93 @@
+{
+  "name": "kuentu",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host",
+    "db:up": "docker compose up -d db",
+    "db:down": "docker compose stop db",
+    "server": "npm --prefix server run dev",
+    "user": "npm --prefix server run user --",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview --host",
+    "seed": "node scripts/fetch-pictos.mjs",
+    "pictos": "node scripts/bundle-pictos.mjs",
+    "desktop": "npm run build && electron .",
+    "dist:win": "npm run build && electron-builder --win zip --x64",
+    "dist:mac": "npm run build && electron-builder --mac",
+    "dist:linux": "npm run build && electron-builder --linux",
+    "dist:win-installer": "npm run build && electron-builder --win nsis --x64",
+    "icons": "node scripts/make-icons.mjs",
+    "android:apk": "npm run build && cap sync android && cd android && ./gradlew assembleRelease",
+    "android:aab": "npm run build && cap sync android && cd android && ./gradlew bundleRelease"
+  },
+  "dependencies": {
+    "@capacitor-community/keep-awake": "^5.0.1",
+    "@capacitor-community/text-to-speech": "^4.1.1",
+    "@capacitor/android": "^6.2.0",
+    "@capacitor/app": "^6.0.2",
+    "@capacitor/core": "^6.2.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.2.0",
+    "@resvg/resvg-js": "^2.6.2",
+    "@types/react": "^18.3.20",
+    "@types/react-dom": "^18.3.6",
+    "@vitejs/plugin-react": "^4.4.1",
+    "electron": "^33.2.1",
+    "electron-builder": "^25.1.8",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5",
+    "vite-plugin-pwa": "^0.21.1"
+  },
+  "description": "Comunicador por pictogramas (CAA) en español",
+  "author": "Menta",
+  "main": "electron/main.cjs",
+  "build": {
+    "appId": "cl.kuentu.app",
+    "productName": "Kuentu",
+    "copyright": "Pictogramas: Sergio Palao, ARASAAC (CC BY-NC-SA 4.0)",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "build/icon.png"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "zip",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "Kuentu-${version}-windows.${ext}",
+      "signAndEditExecutable": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "installerLanguages": [
+        "es_ES"
+      ],
+      "language": "3082",
+      "shortcutName": "Kuentu",
+      "artifactName": "Kuentu-instalador-${version}.${ext}"
+    },
+    "mac": {
+      "target": "dmg",
+      "category": "public.app-category.education"
+    },
+    "linux": {
+      "target": "AppImage",
+      "category": "Education"
+    }
+  }
+}
