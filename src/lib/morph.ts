@@ -39,6 +39,7 @@ const PRESENT: Record<string, Forms> = {
   'sonreír': ['sonrío', 'sonríes', 'sonríe', 'sonreímos', 'sonríen'],
   'freír': ['frío', 'fríes', 'fríe', 'freímos', 'fríen'],
   oler: ['huelo', 'hueles', 'huele', 'olemos', 'huelen'],
+  valer: ['valgo', 'vales', 'vale', 'valemos', 'valen'],
 }
 
 const PAST: Record<string, Forms> = {
@@ -77,6 +78,10 @@ const SUBJUNCTIVE: Record<string, Forms> = {
   dar: ['dé', 'des', 'dé', 'demos', 'den'],
   saber: ['sepa', 'sepas', 'sepa', 'sepamos', 'sepan'],
   haber: ['haya', 'hayas', 'haya', 'hayamos', 'hayan'],
+  oler: ['huela', 'huelas', 'huela', 'olamos', 'huelan'],
+  'reír': ['ría', 'rías', 'ría', 'riamos', 'rían'],
+  'sonreír': ['sonría', 'sonrías', 'sonría', 'sonriamos', 'sonrían'],
+  'freír': ['fría', 'frías', 'fría', 'friamos', 'frían'],
 }
 
 const FUTURE_STEM: Record<string, string> = {
@@ -91,7 +96,7 @@ const IMPERATIVE_TU: Record<string, string> = {
 const PARTICIPLE: Record<string, string> = {
   hacer: 'hecho', decir: 'dicho', ver: 'visto', poner: 'puesto', escribir: 'escrito', abrir: 'abierto',
   romper: 'roto', volver: 'vuelto', devolver: 'devuelto', morir: 'muerto', cubrir: 'cubierto',
-  resolver: 'resuelto', 'freír': 'frito', imprimir: 'impreso',
+  resolver: 'resuelto', envolver: 'envuelto', revolver: 'revuelto', 'freír': 'frito', imprimir: 'impreso',
 }
 
 const GERUND: Record<string, string> = { ir: 'yendo', poder: 'pudiendo', decir: 'diciendo', venir: 'viniendo' }
@@ -100,10 +105,10 @@ const GERUND: Record<string, string> = { ir: 'yendo', poder: 'pudiendo', decir: 
 const STEM_CHANGE: Record<string, 'ie' | 'ue' | 'i'> = {}
 const addStem = (kind: 'ie' | 'ue' | 'i', list: string) => list.split(' ').forEach((v) => (STEM_CHANGE[v] = kind))
 addStem('ie', 'querer pensar cerrar empezar comenzar despertar sentar sentir entender perder encender calentar ' +
-  'preferir mentir divertir regar fregar tener venir nevar merendar')
+  'preferir mentir divertir regar fregar tener venir nevar merendar apretar')
 addStem('ue', 'poder dormir morir volver devolver encontrar contar recordar acordar acostar probar mover llover ' +
-  'costar doler morder soñar volar mostrar sonar almorzar colgar jugar')
-addStem('i', 'pedir vestir repetir servir seguir elegir despedir medir')
+  'costar doler morder soñar volar mostrar sonar almorzar colgar jugar soltar envolver revolver oler')
+addStem('i', 'pedir vestir desvestir repetir servir seguir conseguir elegir despedir medir')
 
 /** Verbos -iar / -uar que llevan tilde: vacío, envío, continúo. */
 const ACCENT_STEM = new Set(['vaciar', 'enviar', 'confiar', 'enfriar', 'continuar', 'actuar', 'resfriar'])
@@ -322,9 +327,12 @@ export function subjunctive(verb: string): Forms | null {
   const base = type === 'ar' ? orthoBeforeE(yoStem) : yoStem
   const forms = endings.map((e) => base + e) as Forms
   if (STEM_CHANGE[verb] && !PRESENT[verb]) {
-    const nosStem = type === 'ir' ? changeStem(stem, 'shift') : stem
+    let nosStem = type === 'ir' ? changeStem(stem, 'shift') : stem
+    if (/guir$/.test(verb)) nosStem = nosStem.slice(0, -1) // sigamos
+    else if (/g(er|ir)$/.test(verb)) nosStem = nosStem.slice(0, -1) + 'j' // elijamos
     forms[3] = (type === 'ar' ? orthoBeforeE(nosStem) : nosStem) + endings[3]
   }
+  if (ACCENT_STEM.has(verb)) forms[3] = stem + endings[3] // vaciemos (sin tilde)
   return forms
 }
 
@@ -335,7 +343,7 @@ export function gerund(verb: string): string | null {
   const [stem, type] = parts
   if (type === 'ar') return stem + 'ando'
   if (verb.endsWith('eír')) return stem.slice(0, -1) + 'iendo' // riendo
-  if (/[aeiou]$/.test(stem) || (/uir$/.test(verb) && !/guir$/.test(verb))) return stem + 'yendo' // leyendo, construyendo
+  if ((/[aeiou]$/.test(stem) && !/[gq]u$/.test(stem)) || (/uir$/.test(verb) && !/guir$/.test(verb))) return stem + 'yendo' // leyendo, construyendo
   if (type === 'ir' && STEM_CHANGE[verb]) return changeStem(stem, 'shift') + 'iendo'
   return stem + 'iendo'
 }
@@ -360,45 +368,90 @@ export function imperativeTu(verb: string): string | null {
 const FEMININE = new Set(
   ('mano foto moto radio flor luz nariz sal piel leche nieve carne noche tarde gente fiebre sangre tos nube miel ' +
     'llave calle clase muerte suerte fuente frente parte vez voz cruz paz raíz coliflor imagen sed hambre red pared ' +
-    'sartén cárcel lombriz torre ave agua águila hacha aula alma área').split(' '),
+    'sartén cárcel lombriz torre ave agua águila hacha aula alma área mujer once serpiente tele serie').split(' '),
 )
 const MASCULINE = new Set(
   ('día mapa sofá problema idioma planeta tema programa papá pijama clima sistema tranvía dentista poeta ' +
-    'cometa guardia policía dólar sillón pie tata').split(' '),
+    'cometa guardia policía dólar sillón pie tata mediodía koala panda puma avión camión arcoíris ' +
+    'microondas paraguas sacapuntas lavamanos lavaplatos saltamontes cumpleaños').split(' '),
 )
 /** Femeninos que llevan "el" en singular: el agua, el águila. */
 const EL_FEMININE = new Set(['agua', 'águila', 'hacha', 'aula', 'alma', 'área', 'hambre', 'ave'])
 
+/** Sustantivos singulares terminados en -s átona: no cambian en plural. */
+const INVARIABLE_NOUN = new Set(
+  'lunes martes miércoles jueves viernes cumpleaños paraguas lavamanos lavaplatos sacapuntas saltamontes arcoíris tenis microondas virus'.split(' '),
+)
+const FOREIGN_PLURAL: Record<string, string> = {
+  closet: 'clósets', mall: 'malls', scooter: 'scooters', jockey: 'jockeys', 'sándwich': 'sándwiches', yogur: 'yogures',
+}
+/** Sin plural útil: fechas, fiestas, asignaturas, deportes… */
+const NO_PLURAL = new Set(
+  ('enero febrero marzo abril mayo junio julio agosto septiembre octubre noviembre diciembre navidad halloween ' +
+    'internet wifi youtube ketchup inglés religión natación gimnasia atletismo ciclismo patinaje karate fútbol ' +
+    'básquetbol vóleibol tenis').split(' ').concat(['año nuevo', 'semana santa', 'fiestas patrias', 'día de la madre',
+    'día del padre', 'día del niño', 'saltar la cuerda', 'educación física']),
+)
+/** Palabras que no se pluralizan dentro de un nombre compuesto: "lápices pasta". */
+const NOUN_MODIFIER = new Set(['pasta'])
+const LINKS = new Set(['de', 'del', 'con', 'a', 'al', 'en', 'para', 'sin'])
+
+/** ¿La palabra ya está en plural? (ojos, tijeras, papas fritas) — no: lunes, mes, inglés, tos. */
+export function isPluralNoun(label: string): boolean {
+  const w = label.toLowerCase().split(' ')[0]
+  if (!/s$/.test(w) || INVARIABLE_NOUN.has(w) || MASCULINE.has(w)) return false
+  return nuclei(w).length > 1 && !/[áéíóú]s$/.test(w)
+}
+
+function singularGuess(w: string): string {
+  if (w.endsWith('ces')) return w.slice(0, -3) + 'z'
+  if (/[lrndj]es$/.test(w)) return w.slice(0, -2)
+  return w.slice(0, -1)
+}
+
 export function nounGender(label: string, override?: Gender): Gender {
   if (override) return override
-  const w = label.toLowerCase().split(' ')[0]
+  let w = label.toLowerCase().split(' ')[0]
+  if (isPluralNoun(w)) w = singularGuess(w)
   if (FEMININE.has(w)) return 'f'
   if (MASCULINE.has(w)) return 'm'
-  if (/(ción|sión|dad|tad|tud|umbre|itis|sis)$/.test(w)) return 'f'
-  if (/as?$/.test(w)) return 'f'
+  if (/(ción|sión|cion|sion|gión|dad|tad|tud|umbre|itis|sis)$/.test(w)) return 'f'
+  if (/[aá]s?$/.test(w)) return 'f'
   return 'm'
 }
 
-export function pluralize(word: string): string {
-  const [first, ...rest] = word.split(' ')
-  const tail = rest.length ? ' ' + rest.join(' ') : ''
-  const w = first
-  if (/[sx]$/.test(w)) return word // lunes, tijeras: ya es plural o invariable
-  if (/[aeiouáéó]$/.test(w)) return w + 's' + tail
-  if (/[íú]$/.test(w)) return w + 's' + tail
-  if (w.endsWith('z')) return w.slice(0, -1) + 'ces' + tail
+function pluralWord(w: string): string {
+  if (FOREIGN_PLURAL[w]) return FOREIGN_PLURAL[w]
+  if (/[sx]$/.test(w)) {
+    // mes → meses, inglés → ingleses; lunes, tijeras: no cambian.
+    if (INVARIABLE_NOUN.has(w) || (nuclei(w).length > 1 && !/[áéíóú][sx]$/.test(w))) return w
+    return w.replace(/([áéíóú])([sx])$/, (_, v: string, c: string) => UNACCENTED[v] + c) + 'es'
+  }
+  if (/[aeiouáéó]$/.test(w)) return w + 's'
+  if (/[íú]$/.test(w)) return w + 's'
+  if (w.endsWith('z')) return w.slice(0, -1) + 'ces'
+  if (!/([lrndjy]|ch)$/.test(w)) return w + 's' // palabras de otros idiomas: tablets, shorts, livings
   // Agudas terminadas en n/s/l pierden la tilde: ratón → ratones. Graves en -en la ganan: imagen → imágenes.
   const unaccented = w.replace(/([áéíóú])([nsl])$/, (_, v: string, c: string) => UNACCENTED[v] + c)
-  if (unaccented === w && /en$/.test(w) && nuclei(w).length >= 2) return attachClitics(w, 'es') + tail
-  return unaccented + 'es' + tail
+  if (unaccented === w && /en$/.test(w) && nuclei(w).length >= 2) return attachClitics(w, 'es')
+  return unaccented + 'es'
+}
+
+/** "huevo revuelto" → "huevos revueltos"; "silla de ruedas" → "sillas de ruedas". */
+export function pluralize(word: string): string {
+  if (isPluralNoun(word) || NO_PLURAL.has(word.toLowerCase())) return word
+  const parts = word.split(' ')
+  const link = parts.findIndex((p, i) => i > 0 && LINKS.has(p.toLowerCase()))
+  const end = link === -1 ? parts.length : link
+  return parts.map((p, i) => (i === 0 || (i < end && !NOUN_MODIFIER.has(p)) ? pluralWord(p) : p)).join(' ')
 }
 
 export function articleFor(gender: Gender, plural: boolean, definite: boolean, noun?: string): string {
   if (definite) {
-    if (!plural && gender === 'f' && noun && EL_FEMININE.has(noun.toLowerCase())) return 'el'
+    if (!plural && gender === 'f' && noun && EL_FEMININE.has(noun.toLowerCase().split(' ')[0])) return 'el'
     return plural ? (gender === 'f' ? 'las' : 'los') : gender === 'f' ? 'la' : 'el'
   }
-  if (!plural && gender === 'f' && noun && EL_FEMININE.has(noun.toLowerCase())) return 'un'
+  if (!plural && gender === 'f' && noun && EL_FEMININE.has(noun.toLowerCase().split(' ')[0])) return 'un'
   return plural ? (gender === 'f' ? 'unas' : 'unos') : gender === 'f' ? 'una' : 'un'
 }
 
@@ -406,9 +459,12 @@ const INVARIABLE = new Set([
   'más', 'menos', 'aquí', 'acá', 'allá', 'allí', 'ahí', 'ahora', 'hoy', 'mañana', 'ayer', 'después', 'antes',
   'temprano', 'tarde', 'bien', 'mal', 'también', 'tampoco', 'muy', 'nunca', 'siempre', 'ya', 'nada', 'algo',
   'arriba', 'abajo', 'adentro', 'afuera', 'cerca', 'lejos', 'luego', 'así', 'casi', 'solo', 'bastante', 'demasiado',
+  'cada', 'cero', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve', 'diez', 'once', 'doce', 'trece',
+  'catorce', 'quince', 'dieciséis', 'diecisiete', 'dieciocho', 'diecinueve', 'veinte', 'treinta', 'cuarenta',
+  'cincuenta', 'cien', 'mil',
 ])
 
-const NO_FEMININE = new Set(['mejor', 'peor', 'mayor', 'menor', 'marrón', 'interior', 'exterior', 'anterior', 'superior', 'inferior', 'afín'])
+const NO_FEMININE = new Set(['mejor', 'peor', 'mayor', 'menor', 'marrón', 'interior', 'exterior', 'anterior', 'superior', 'inferior', 'afín', 'bacán'])
 
 const SHORT_FORM: Record<string, string> = { bueno: 'buen', malo: 'mal', grande: 'gran', primero: 'primer', tercero: 'tercer', alguno: 'algún', ninguno: 'ningún' }
 const COMPARATIVE: Record<string, string[]> = {
@@ -419,6 +475,7 @@ const COMPARATIVE: Record<string, string[]> = {
 /** [masc. sing., fem. sing., masc. pl., fem. pl.] (o [sing., pl.] si no cambia de género). */
 export function adjectiveForms(word: string): string[] {
   if (INVARIABLE.has(word) || word.includes(' ')) return [word]
+  if (word === 'varios') return ['varios', 'varias']
   if (word.endsWith('o')) {
     const base = word.slice(0, -1)
     return [word, base + 'a', word + 's', base + 'as']
@@ -617,9 +674,16 @@ export function formGroups(label: string, wordClass: WordClass, opts: FormOption
   }
 
   if (wordClass === 'noun') {
-    const plural = pluralize(w)
     const g = nounGender(w)
     const forms: FormItem[] = []
+    if (isPluralNoun(w)) {
+      // Ya está en plural (ojos, tijeras): los ojos, unos ojos.
+      forms.push({ text: label, hint: 'varios' })
+      forms.push({ text: `${articleFor(g, true, true)} ${label}` })
+      forms.push({ text: `${articleFor(g, true, false)} ${label}` })
+      return [{ title: 'Formas', forms }]
+    }
+    const plural = pluralize(w)
     forms.push({ text: label, hint: 'uno' })
     if (plural !== w) forms.push({ text: plural, hint: 'varios' })
     forms.push({ text: `${articleFor(g, false, true, w)} ${label}` })
@@ -689,6 +753,13 @@ export interface SmartContext {
  * - "el" + "manzana" → "la manzana"; "las" + "manzana" → "las manzanas"; "a" + "el" → "al"
  * - "estoy" + "cansado" → "estoy cansada" (si el usuario es niña); "ella está" + "cansado" → "cansada"
  */
+/** Frases fijas con adjetivo: se dicen en femenino si la usuaria es niña ("estoy cansada"). */
+const GENDERED_PHRASE = /\b(enfermo|cansado|perdido|tranquilo|solo|listo|preparado|aburrido|asustado|contento|enojado|nervioso|bienvenido)\b/
+export function phraseForGender(text: string, gender: Gender): string {
+  if (gender !== 'f') return text
+  return text.replace(GENDERED_PHRASE, (w) => w.slice(0, -1) + 'a')
+}
+
 export function applySmartGrammar(tokens: Token[], next: Token, ctx: SmartContext): Token[] {
   const word = next.text.toLowerCase()
   const last = tokens[tokens.length - 1]?.text.toLowerCase()
@@ -701,8 +772,14 @@ export function applySmartGrammar(tokens: Token[], next: Token, ctx: SmartContex
       const person = personOf(tokens[si].text)!
       if (GUSTAR_LIKE.has(v.verb) && !v.reflexive) {
         const pres = present(v.verb)!
-        const rest = [...tokens.slice(0, si), ...tokens.slice(si + 1)]
-        return [...rest, { text: IO_PRONOUN[person], image: tokens[si].image }, { ...next, text: pres[2] + (v.tail ? ' ' + v.tail : '') }]
+        // "eso" + "doler" → "eso duele" (eso es la cosa, no la persona).
+        if (['eso', 'esto', 'aquello'].includes(tokens[si].text.toLowerCase())) {
+          return [...tokens, { ...next, text: pres[2] + (v.tail ? ' ' + v.tail : '') }]
+        }
+        // "ella" + "gustar" → "a ella le gusta" (se mantiene quién); "yo" → "me gusta".
+        const keep = person === 2 || person === 4 ? [{ ...tokens[si], text: 'a ' + tokens[si].text }] : []
+        const rest = [...tokens.slice(0, si), ...keep, ...tokens.slice(si + 1)]
+        return [...rest, { text: IO_PRONOUN[person], image: keep.length ? undefined : tokens[si].image }, { ...next, text: pres[2] + (v.tail ? ' ' + v.tail : '') }]
       }
       return [...tokens, { ...next, text: personal(v, present(v.verb), person, false) }]
     }
@@ -723,9 +800,10 @@ export function applySmartGrammar(tokens: Token[], next: Token, ctx: SmartContex
 
   if (ctx.wordClass === 'noun' && last && ARTICLES.has(last)) {
     const definite = ['el', 'la', 'los', 'las'].includes(last)
-    const plural = ['los', 'las', 'unos', 'unas'].includes(last)
+    const already = isPluralNoun(word)
+    const plural = already || ['los', 'las', 'unos', 'unas'].includes(last)
     const g = nounGender(word, ctx.gender)
-    const noun = plural ? pluralize(next.text) : next.text
+    const noun = plural && !already ? pluralize(next.text) : next.text
     const article = articleFor(g, plural, definite, word)
     return [...tokens.slice(0, -1), { ...tokens[tokens.length - 1], text: article }, { ...next, text: noun }]
   }
@@ -740,6 +818,11 @@ export function applySmartGrammar(tokens: Token[], next: Token, ctx: SmartContex
     else if (pronoun === 'ella' || pronoun === 'ellas' || pronoun === 'nosotras') gender = 'f'
     if (pronoun && ['nosotros', 'nosotras', 'ellos', 'ellas', 'ustedes'].includes(pronoun)) plural = true
     return [...tokens, { ...next, text: inflectAdjective(word, gender, plural) }]
+  }
+
+  if (ctx.wordClass === 'social') {
+    const text = phraseForGender(next.text, ctx.userGender)
+    if (text !== next.text) return [...tokens, { ...next, text }]
   }
 
   return [...tokens, next]

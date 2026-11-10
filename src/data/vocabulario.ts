@@ -4,6 +4,7 @@
 //   "palta=aguacate"  → se muestra "palta"; "aguacate" sirve para buscar el pictograma y en el buscador.
 //   "bañar(se)"       → verbo reflexivo (me baño, te bañas…).
 //   "pelota#noun"     → cambia la clase gramatical solo para esa palabra.
+//   "once@once-comida" → usa ese pictograma propio (cuando la misma palabra tiene dos sentidos).
 
 import type { WordClass } from '../lib/types'
 
@@ -101,13 +102,13 @@ export const FOLDERS: VocabFolder[] = [
     icon: 'acción',
     starters: 'quiero|vamos a|puedo|necesito|ayúdame a|no quiero',
     groups: [
-      { name: 'Necesidades', cls: 'verb', icon: 'dormir', words: 'comer, tomar=beber, tragar, masticar, dormir, despertar(se)=despertar, descansar, acostar(se)=acostar, levantar(se)=levantar, bañar(se)=bañar, duchar(se)=ducharse, lavar(se)=lavar, secar(se)=secar, peinar(se)=peinar, cepillar(se) los dientes=cepillar los dientes, vestir(se)=vestir, desvestir(se)=desvestir, poner(se)=poner, sacar(se)=quitar, ir al baño=váter, hacer pipí=orinar, hacer caca=defecar, sonar(se) la nariz=sonarse, respirar, toser, estornudar, vomitar, sangrar, doler, picar, sudar, tener frío=frío, tener calor=calor, tener hambre=hambre, tener sed=sed, tener sueño=sueño' },
-      { name: 'Moverse', cls: 'verb', icon: 'correr', words: 'ir, venir, volver, llegar, salir, entrar, caminar=andar, correr, saltar, subir, bajar, sentar(se)=sentar, parar(se)=levantarse, agachar(se)=agacharse, caer(se)=caer, girar, dar vuelta=girar, empujar, tirar, arrastrar, mover(se)=mover, quedar(se)=quedarse, esperar, seguir, alcanzar, nadar, trepar, bailar, columpiar(se)=columpiar, andar en bici=montar en bicicleta, manejar=conducir' },
-      { name: 'Manos y cosas', cls: 'verb', icon: 'coger', words: 'dar, tomar=coger, agarrar=coger, poner, sacar, traer, llevar, abrir, cerrar, tocar, apretar, soltar, lanzar, atrapar, guardar, ordenar, buscar, encontrar, perder, esconder, mostrar, compartir, prestar, devolver, cambiar, cortar, pegar, romper, arreglar, construir, armar=montar, desarmar=desmontar, llenar, vaciar, echar, mezclar, revolver=remover, servir, prender=encender, apagar, cargar, enchufar, colgar, doblar, envolver, limpiar, lavar, secar, barrer, botar=tirar a la basura' },
+      { name: 'Necesidades', cls: 'verb', icon: 'dormir', words: 'comer, tomar=beber, tragar, masticar, dormir, despertar(se)=despertar, descansar, acostar(se)=acostar, levantar(se)=levantar, bañar(se)=bañar, duchar(se)=ducharse, lavar(se)=lavar, secar(se)=secar, peinar(se)=peinar, cepillar(se) los dientes=cepillar los dientes, vestir(se)=vestir, desvestir(se)=desvestir, poner(se)=poner, sacar(se)=quitar, ir al baño=váter, hacer pipí=orinar, hacer caca=defecar, sonar(se) la nariz=sonarse, respirar, oler, toser, estornudar, vomitar, sangrar, doler, picar, sudar, tener frío=frío, tener calor=calor, tener hambre=hambre, tener sed=sed, tener sueño=sueño' },
+      { name: 'Moverse', cls: 'verb', icon: 'correr', words: 'ir, venir, volver, llegar, salir, entrar, caminar=andar, correr, saltar, subir, bajar, sentar(se)=sentar, parar(se)=levantarse, agachar(se)=agacharse, caer(se)=caer, girar, dar vuelta=girar, empujar, tirar, arrastrar, mover(se)=mover, quedar(se)=quedarse, esperar, seguir, acompañar, alcanzar, nadar, trepar, bailar, columpiar(se)=columpiar, andar en bici=montar en bicicleta, manejar=conducir' },
+      { name: 'Manos y cosas', cls: 'verb', icon: 'coger', words: 'dar, dejar, tomar=coger, agarrar=coger, poner, sacar, traer, llevar, abrir, cerrar, tocar, apretar, soltar, lanzar, atrapar, guardar, usar, ordenar, buscar, encontrar, perder, esconder, mostrar, compartir, prestar, devolver, cambiar, cortar, pegar, romper, arreglar, construir, armar=montar, desarmar=desmontar, llenar, vaciar, echar, mezclar, revolver=remover, servir, prender=encender, apagar, cargar, enchufar, colgar, doblar, envolver, limpiar, lavar, secar, barrer, botar=tirar a la basura' },
       { name: 'Hablar y pensar', cls: 'verb', icon: 'hablar', words: 'decir, hablar, contar, preguntar, responder, llamar, gritar, susurrar, cantar, explicar, repetir, escuchar, oír, mirar, ver, leer, escribir, deletrear, saber, conocer, pensar, creer, entender, acordar(se)=recordar, olvidar, aprender, enseñar, estudiar, elegir, decidir, probar, intentar, imaginar, soñar, adivinar, mentir, prometer, avisar, pedir, invitar, saludar, despedir(se)=despedir' },
-      { name: 'Sentir', cls: 'verb', icon: 'sentir', words: 'querer, gustar, encantar, odiar, sentir, molestar, importar, preocupar(se)=preocupar, asustar(se)=asustar, enojar(se)=enfadarse, aburrir(se)=aburrir, cansar(se)=cansar, calmar(se)=calmar, relajar(se)=relajar, reír(se)=reír, sonreír, llorar, abrazar, besar, acariciar, cuidar, ayudar, pelear, perdonar, disculpar(se)=disculpar, extrañar=echar de menos, confiar, ganar, perder, portarse bien, portarse mal' },
+      { name: 'Sentir', cls: 'verb', icon: 'sentir', words: 'querer, gustar, encantar, odiar, sentir, molestar, importar, preocupar(se)=preocupar, asustar(se)=asustar, enojar(se)=enfadarse, aburrir(se)=aburrir, divertir(se)=divertirse, cansar(se)=cansar, calmar(se)=calmar, relajar(se)=relajar, reír(se)=reír, sonreír, llorar, abrazar, besar, acariciar, cuidar, ayudar, pelear, morder, perdonar, disculpar(se)=disculpar, extrañar=echar de menos, confiar, ganar, perder, portarse bien, portarse mal' },
       { name: 'Casa y escuela', cls: 'verb', icon: 'cocinar', words: 'jugar, pintar, dibujar, colorear, recortar, escribir, leer, contar, sumar, restar, cocinar, freír, hornear, calentar, enfriar, comprar, pagar, vender, trabajar, ver tele=ver la televisión, ver videos=vídeo, escuchar música, sacar fotos=fotografiar, grabar, mandar mensaje=mensaje, llamar por teléfono=llamar por teléfono, pasear, viajar, visitar, celebrar, regalar, patear=chutar' },
-      { name: 'Ser y estar', cls: 'verb', icon: 'ser', words: 'ser, estar, tener, hacer, poder, deber, tener que, ir a, acabar de, empezar, terminar, seguir, parecer, pasar, quedar, faltar, sobrar, valer, costar, necesitar' },
+      { name: 'Ser y estar', cls: 'verb', icon: 'ser', words: 'ser, estar, vivir, tener, hacer, poder, deber, tener que, ir a, acabar de, empezar, terminar, seguir, parecer, pasar, quedar, faltar, sobrar, valer, costar, necesitar' },
     ],
   },
   {
@@ -166,7 +167,7 @@ export const FOLDERS: VocabFolder[] = [
     icon: 'comida',
     starters: 'quiero comer|tengo hambre|me gusta|no me gusta|ya no quiero|está rico',
     groups: [
-      { name: 'Comidas del día', cls: 'noun', icon: 'desayuno', words: 'desayuno, almuerzo=comida, once=merienda, cena, colación=tentempié, postre' },
+      { name: 'Comidas del día', cls: 'noun', icon: 'desayuno', words: 'desayuno, almuerzo=comida, once=merienda@once-comida, cena, colación=tentempié, postre' },
       { name: 'Desayuno y once', cls: 'noun', icon: 'pan', words: 'pan, marraqueta=pan, hallulla=pan, tostada, mantequilla, mermelada, manjar=dulce de leche, palta=aguacate, jamón, queso, huevo, huevo revuelto, cereal, avena, yogur, leche, panqueque=crepe, galletas=galleta' },
       { name: 'Frutas', cls: 'noun', icon: 'fruta', words: 'manzana, plátano, naranja, mandarina, pera, uva, frutilla=fresa, sandía, melón, durazno=melocotón, ciruela, kiwi, piña, mango, cereza, arándano, frambuesa, limón, chirimoya, fruta picada=macedonia' },
       { name: 'Verduras', cls: 'noun', icon: 'verdura', words: 'tomate, lechuga, zanahoria, papa=patata, choclo=maíz, arvejas=guisante, porotos verdes=judías verdes, brócoli, coliflor, zapallo=calabaza, zapallo italiano=calabacín, pepino, cebolla, ajo, pimentón=pimiento, betarraga=remolacha, espinaca, apio, champiñones=champiñón, ensalada' },
@@ -231,7 +232,7 @@ export const FOLDERS: VocabFolder[] = [
     starters: '¿qué hora es?|¿cuándo?|¿qué día es hoy?',
     groups: [
       { name: 'Cuándo', cls: 'adv', icon: 'cuándo', words: 'hoy, mañana, ayer, ahora, después, antes, luego, pronto, temprano, tarde, todavía, ya, siempre, nunca, a veces, al tiro=inmediatamente, un ratito=rato, en la mañana=mañana, en la tarde=tarde, en la noche=noche, el fin de semana=fin de semana' },
-      { name: 'Día y hora', cls: 'noun', icon: 'reloj', words: 'mañana, mediodía, tarde, noche, día, hora, minuto, semana, mes, año, cumpleaños, reloj, calendario, la una, las dos, las tres, y media, en punto' },
+      { name: 'Día y hora', cls: 'noun', icon: 'reloj', words: 'mañana, mediodía, tarde, noche, día, hora, minuto, semana, mes, año, cumpleaños, reloj, calendario, la una#adv, las dos#adv, las tres#adv, y media#adv, en punto#adv' },
       { name: 'Días', cls: 'noun', icon: 'semana', words: 'lunes, martes, miércoles, jueves, viernes, sábado, domingo, fin de semana' },
       { name: 'Meses', cls: 'noun', icon: 'mes', words: 'enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre, verano, otoño, invierno, primavera, vacaciones' },
     ],
@@ -241,7 +242,7 @@ export const FOLDERS: VocabFolder[] = [
     name: 'Números',
     icon: 'números',
     groups: [
-      { name: 'Números', cls: 'adj', words: 'cero, uno, dos, tres, cuatro, cinco, seis, siete, ocho, nueve, diez, once, doce, trece, catorce, quince, veinte, treinta, cuarenta, cincuenta, cien, mil, primero, segundo, tercero, último, la mitad=mitad, el doble=doble, número#noun, contar#verb' },
+      { name: 'Números', cls: 'adj', words: 'cero, uno, dos, tres, cuatro, cinco, seis, siete, ocho, nueve, diez, once, doce, trece, catorce, quince, dieciséis, diecisiete, dieciocho, diecinueve, veinte, treinta, cuarenta, cincuenta, cien, mil, primero, segundo, tercero, último, la mitad=mitad, el doble=doble, número#noun, contar#verb' },
     ],
   },
   {
@@ -315,6 +316,8 @@ export interface ParsedEntry {
   label: string
   alt?: string
   cls?: WordClass
+  /** Pictograma propio elegido a mano ("kuentu:<picto>"). */
+  picto?: string
 }
 
 export function parseList(words: string): ParsedEntry[] {
@@ -325,12 +328,18 @@ export function parseList(words: string): ParsedEntry[] {
     .map((p) => {
       let rest = p
       let cls: WordClass | undefined
+      let picto: string | undefined
+      const at = rest.match(/@([\w-]+)/)
+      if (at) {
+        picto = at[1]
+        rest = rest.replace(at[0], '')
+      }
       const hash = rest.match(/#(\w+)/)
       if (hash) {
         cls = hash[1] as WordClass
         rest = rest.replace(hash[0], '')
       }
       const [label, alt] = rest.split('=').map((s) => s.trim())
-      return { label, alt: alt || undefined, cls }
+      return { label, alt: alt || undefined, cls, picto }
     })
 }
