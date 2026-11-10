@@ -1,7 +1,7 @@
 {
   "name": "kuentu",
   "private": true,
-  "version": "0.2.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite --host",
@@ -11,28 +11,31 @@
     "user": "npm --prefix server run user --",
     "build": "tsc -b && vite build",
     "preview": "vite preview --host",
-    "seed": "node scripts/fetch-pictos.mjs",
-    "pictos": "node scripts/bundle-pictos.mjs",
     "desktop": "npm run build && electron .",
     "dist:win": "npm run build && electron-builder --win zip --x64",
     "dist:mac": "npm run build && electron-builder --mac",
     "dist:linux": "npm run build && electron-builder --linux",
     "dist:win-installer": "npm run build && electron-builder --win nsis --x64",
     "icons": "node scripts/make-icons.mjs",
+    "pictos:conceptos": "node scripts/pictos/conceptos.mjs",
+    "pictos:generar": "node scripts/pictos/generate.mjs",
+    "pictos:index": "node scripts/pictos/index.mjs",
     "android:apk": "npm run build && cap sync android && cd android && ./gradlew assembleRelease",
-    "android:aab": "npm run build && cap sync android && cd android && ./gradlew bundleRelease"
+    "android:aab": "npm run build && cap sync android && cd android && ./gradlew bundleRelease",
+    "ios:sync": "npm run build && cap sync ios"
   },
   "dependencies": {
-    "@capacitor-community/keep-awake": "^5.0.1",
-    "@capacitor-community/text-to-speech": "^4.1.1",
-    "@capacitor/android": "^6.2.0",
-    "@capacitor/app": "^6.0.2",
-    "@capacitor/core": "^6.2.0",
+    "@capacitor-community/keep-awake": "^8.0.1",
+    "@capacitor-community/text-to-speech": "^8.0.2",
+    "@capacitor/android": "^8.6.0",
+    "@capacitor/app": "^8.1.2",
+    "@capacitor/core": "^8.6.0",
+    "@capacitor/ios": "^8.6.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@capacitor/cli": "^6.2.0",
+    "@capacitor/cli": "^8.6.0",
     "@resvg/resvg-js": "^2.6.2",
     "@types/react": "^18.3.20",
     "@types/react-dom": "^18.3.6",
@@ -49,7 +52,7 @@
   "build": {
     "appId": "cl.kuentu.app",
     "productName": "Kuentu",
-    "copyright": "Pictogramas: Sergio Palao, ARASAAC (CC BY-NC-SA 4.0)",
+    "copyright": "© Menta. Pictogramas propios de Kuentu.",
     "directories": {
       "output": "release",
       "buildResources": "build"

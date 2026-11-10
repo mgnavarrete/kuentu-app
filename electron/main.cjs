@@ -20,7 +20,7 @@ function createWindow() {
     webPreferences: { contextIsolation: true, sandbox: true },
   })
   win.loadFile(path.join(__dirname, '..', 'dist', 'index.html'))
-  // Los enlaces (ej. créditos de ARASAAC) se abren en el navegador, no dentro de la app.
+  // Los enlaces se abren en el navegador, no dentro de la app.
   win.webContents.setWindowOpenHandler(({ url }) => {
     shell.openExternal(url)
     return { action: 'deny' }

@@ -2,11 +2,9 @@ import { FOLDERS, HOME_WORDS, MORE_FOLDERS, parseList, type ParsedEntry } from '
 import { HOME_LAYOUT } from '../data/layouts'
 import pictos from '../data/pictos.json'
 import overrides from '../data/picto-overrides.json'
-import bundled from '../data/bundled-pictos.json'
+import kuentu from '../data/kuentu-pictos.json'
 import type { AppData, Board, Cell, GridSize, Settings, WordClass } from './types'
 
-/** Pictogramas incluidos en la app (public/pictos): funcionan sin internet. */
-const bundledIds = new Set(bundled as number[])
 const pictoIds = { ...(pictos as Record<string, number>), ...(overrides as Record<string, number | null | string>) }
 
 export function uid(): string {
@@ -46,9 +44,16 @@ export function resolveGridSize(setting: Settings['gridSize'], width: number, he
   return 'grande'
 }
 
+/** Biblioteca propia de pictogramas de Kuentu (public/pictos/kuentu), incluida en la app. */
+const own = kuentu as { labels: Record<string, string>; ids: Record<string, string>; all: { slug: string; words: string }[] }
+export const ownPictos = own.all
+
 function picto(label: string): string | undefined {
+  const mine = own.labels[label.toLowerCase()]
+  if (mine) return `kuentu:${mine}`
+  // Palabras agregadas a mano en picto-overrides.json que apuntan a un concepto propio.
   const id = pictoIds[label.toLowerCase()]
-  return typeof id === 'number' ? `arasaac:${id}` : undefined
+  return typeof id === 'number' && own.ids[id] ? `kuentu:${own.ids[id]}` : undefined
 }
 
 function wordCell(e: ParsedEntry, cls: WordClass, idPrefix: string, section?: string): Cell {
@@ -58,7 +63,7 @@ function wordCell(e: ParsedEntry, cls: WordClass, idPrefix: string, section?: st
     label: e.label,
     speak: /…/.test(e.label) ? e.label.replace(/…/g, '').trim() : undefined,
     wordClass: e.cls ?? (isPhrase && cls === 'adj' ? 'social' : cls),
-    image: picto(e.label),
+    image: e.picto ? `kuentu:${e.picto}` : picto(e.label),
     keywords: e.alt,
     section,
   }
@@ -133,10 +138,11 @@ export function defaultData(): AppData {
 
 export function imageUrl(image: string | undefined): string | undefined {
   if (!image) return undefined
+  if (image.startsWith('kuentu:')) return `pictos/kuentu/${image.slice('kuentu:'.length)}.webp`
   if (image.startsWith('arasaac:')) {
     const id = image.slice('arasaac:'.length)
-    if (bundledIds.has(Number(id))) return `pictos/${id}.png`
-    return `https://static.arasaac.org/pictograms/${id}/${id}_300.png`
+    // Tableros guardados con la biblioteca anterior: se muestra el pictograma propio equivalente.
+    return own.ids[id] ? `pictos/kuentu/${own.ids[id]}.webp` : undefined
   }
   return image
 }

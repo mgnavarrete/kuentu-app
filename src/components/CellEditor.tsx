@@ -114,8 +114,8 @@ export function CellEditor({ cell, isNew, boards, currentBoardId, onSave, onDele
           {searching && (
             <PictoSearch
               initialQuery={draft.label}
-              onPick={(id) => {
-                set({ image: `arasaac:${id}` })
+              onPick={(image) => {
+                set({ image })
                 setSearching(false)
               }}
             />

@@ -4,6 +4,7 @@
 // - kuentu-app: ícono de la app (PWA, Windows, Android)
 // Las versiones «black» son para fondo azul #1C375B; las normales para fondo blanco.
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { deflateSync } from 'node:zlib'
 import { Resvg } from '@resvg/resvg-js'
 
 const NAVY = '#1C375B'
@@ -38,6 +39,30 @@ function render(svg, width, height = width, { scale = 1, bg, shape = 'square' } 
     </g>
   </svg>`
   return new Resvg(doc, { fitTo: { mode: 'original' } }).render().asPng()
+}
+
+/** PNG sin canal alfa (Apple rechaza íconos con transparencia). */
+function renderOpaque(svg, width, height, opts) {
+  const doc = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}"><image href="data:image/png;base64,${render(svg, width, height, opts).toString('base64')}" width="${width}" height="${height}"/></svg>`
+  const img = new Resvg(doc, { fitTo: { mode: 'original' } }).render()
+  const rgba = img.pixels
+  const raw = Buffer.alloc((width * 3 + 1) * height)
+  for (let y = 0; y < height; y++) {
+    raw[y * (width * 3 + 1)] = 0
+    for (let x = 0; x < width; x++) {
+      const i = (y * width + x) * 4, o = y * (width * 3 + 1) + 1 + x * 3
+      raw[o] = rgba[i]; raw[o + 1] = rgba[i + 1]; raw[o + 2] = rgba[i + 2]
+    }
+  }
+  const crcTable = Array.from({ length: 256 }, (_, n) => { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1; return c >>> 0 })
+  const crc = (buf) => { let c = 0xffffffff; for (const b of buf) c = crcTable[(c ^ b) & 0xff] ^ (c >>> 8); return (c ^ 0xffffffff) >>> 0 }
+  const chunk = (type, data) => {
+    const len = Buffer.alloc(4); len.writeUInt32BE(data.length)
+    const td = Buffer.concat([Buffer.from(type), data]); const c = Buffer.alloc(4); c.writeUInt32BE(crc(td))
+    return Buffer.concat([len, td, c])
+  }
+  const ihdr = Buffer.alloc(13); ihdr.writeUInt32BE(width, 0); ihdr.writeUInt32BE(height, 4); ihdr[8] = 8; ihdr[9] = 2
+  return Buffer.concat([Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]), chunk('IHDR', ihdr), chunk('IDAT', deflateSync(raw)), chunk('IEND', Buffer.alloc(0))])
 }
 
 const out = (path, data) => writeFileSync(new URL(`../${path}`, import.meta.url), data)
@@ -82,5 +107,14 @@ if (existsSync(res)) {
     }
   }
   console.log('Íconos de Android generados.')
+}
+// iOS: ícono de 1024 px sin transparencia y pantalla de inicio.
+const ios = new URL('../ios/App/App/Assets.xcassets/', import.meta.url)
+if (existsSync(ios)) {
+  writeFileSync(new URL('AppIcon.appiconset/AppIcon-512@2x.png', ios), renderOpaque(APP, 1024, 1024, { bg: NAVY }))
+  for (const f of ['splash-2732x2732.png', 'splash-2732x2732-1.png', 'splash-2732x2732-2.png']) {
+    writeFileSync(new URL(`Splash.imageset/${f}`, ios), render(LONG_BLACK, 2732, 2732, { scale: 0.3, bg: NAVY }))
+  }
+  console.log('Íconos de iOS generados.')
 }
 console.log('Íconos generados.')

@@ -1,5 +1,5 @@
 {
-  "_comentario": "Pictogramas corregidos a mano (ARASAAC elige mal en palabras con varios significados). null = solo texto.",
+  "_comentario": "Agrupa palabras con otro concepto (id numérico heredado de la biblioteca anterior). null = solo texto.",
   "mango": 16813,
   "naranja": 2483,
   "si": null,

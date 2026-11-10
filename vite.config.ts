@@ -30,7 +30,7 @@ export default defineConfig({
         ],
       },
       workbox: {
-        navigateFallbackDenylist: [/^\/api\//],
+        navigateFallbackDenylist: [/^\/api\//, /privacidad\.html$/],
         globPatterns: ['**/*.{js,css,html,svg}', 'icon-*.png'],
         runtimeCaching: [
           {
@@ -38,21 +38,6 @@ export default defineConfig({
             urlPattern: ({ url }) => url.pathname.includes('/pictos/'),
             handler: 'CacheFirst',
             options: { cacheName: 'pictos-locales', expiration: { maxEntries: 3000 } },
-          },
-          {
-            // Pictogramas: se guardan al verlos por primera vez para funcionar sin conexión.
-            urlPattern: /^https:\/\/static\.arasaac\.org\/.*/,
-            handler: 'CacheFirst',
-            options: {
-              cacheName: 'pictogramas',
-              expiration: { maxEntries: 3000, maxAgeSeconds: 60 * 60 * 24 * 365 },
-              cacheableResponse: { statuses: [0, 200] },
-            },
-          },
-          {
-            urlPattern: /^https:\/\/api\.arasaac\.org\/.*/,
-            handler: 'NetworkFirst',
-            options: { cacheName: 'arasaac-api', expiration: { maxEntries: 200 } },
           },
         ],
       },

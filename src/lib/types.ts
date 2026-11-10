@@ -23,7 +23,7 @@ export interface Cell {
   /** Texto que se pronuncia si es distinto de la etiqueta. */
   speak?: string
   wordClass: WordClass
-  /** "arasaac:<id>" o una imagen propia como data URL. */
+  /** "kuentu:<concepto>" (biblioteca incluida) o una foto propia como data URL. ("arasaac:<id>" en datos antiguos.) */
   image?: string
   /** Si existe, el botón es una carpeta que abre este tablero. */
   folder?: string

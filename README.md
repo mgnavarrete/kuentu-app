@@ -5,7 +5,7 @@ Funciona en celular, tablet y computador, y se puede instalar como app (PWA) par
 
 ## Funciones
 
-- **~1.700 palabras y frases** en español de Chile (ver `docs/diccionario.md`), con 96 % de pictogramas ARASAAC.
+- **~1.700 palabras y frases** en español de Chile (ver `docs/diccionario.md`), con ~1.300 pictogramas propios incluidos en la app (funcionan sin internet).
 - **Inicio por niveles**: 3 tamaños (grande 10×12, mediano 6×8, chico 7×5) con el mismo orden; se elige solo según la pantalla o en Ajustes.
 - **Plantilla núcleo**: las palabras principales (yo, querer, más, no, qué…) quedan en el mismo lugar dentro de todas las carpetas.
 - **Colores como Proloquo2Go** (borde de color) y **esquina coloreada** en los botones que tienen más formas.
@@ -16,7 +16,7 @@ Funciona en celular, tablet y computador, y se puede instalar como app (PWA) par
 - **Recientes**: historial de frases dichas, para repetirlas o guardarlas como botón.
 - Empezar mensaje nuevo al tocar después de decirlo, volver a Inicio tras elegir (opcional).
 - **Teclado** con números, frases rápidas y predicción que aprende.
-- **Modo edición**: agregar, editar, ocultar, mover y eliminar botones; pictogramas de ARASAAC o fotos; carpetas nuevas; género del sustantivo.
+- **Modo edición**: agregar, editar, ocultar, mover y eliminar botones; pictogramas de la biblioteca propia o fotos; carpetas nuevas; género del sustantivo.
 - Respaldo y restauración en un archivo JSON. Funciona sin conexión (PWA).
 
 ## Desarrollo
@@ -26,12 +26,10 @@ npm install
 npm run dev        # servidor de desarrollo (también accesible desde la red local)
 npm run build      # genera dist/ para publicar
 npm run preview    # sirve dist/
-npm run seed       # busca en ARASAAC los pictogramas de src/data/vocabulario.ts
 ```
 
 El vocabulario está en `src/data/vocabulario.ts` y la posición de cada palabra de Inicio en `src/data/layouts.ts`.
-Después de cambiar el vocabulario, ejecuta `npm run seed` para buscar los pictogramas nuevos (`src/data/pictos.json`).
-Los pictogramas mal elegidos se corrigen a mano en `src/data/picto-overrides.json`.
+Después de cambiar el vocabulario, genera los pictogramas que falten (ver «Pictogramas» más abajo).
 
 Para instalarla en un celular como app y usarla sin conexión, hay que publicarla con HTTPS (Netlify, Vercel, GitHub Pages, Cloudflare Pages…): basta con subir la carpeta `dist/`.
 
@@ -107,7 +105,7 @@ La app de Android usa Capacitor (carpeta `android/`), incluye los pictogramas y 
 Requiere Java 17 y el Android SDK (en esta máquina están en `~/android-tools`):
 
 ```bash
-export JAVA_HOME=~/android-tools/jdk17 ANDROID_HOME=~/android-tools/sdk
+export JAVA_HOME=~/android-tools/jdk21 ANDROID_HOME=~/android-tools/sdk
 npm run android:apk   # → android/app/build/outputs/apk/release/app-release.apk
 npm run android:aab   # → .aab firmado para subir a Google Play
 ```
@@ -116,7 +114,19 @@ npm run android:aab   # → .aab firmado para subir a Google Play
 No se suben a git. **Respáldalas**: sin ellas no se pueden publicar actualizaciones de la app ya instalada.
 Para cada versión nueva, sube `versionCode` y `versionName` en `android/app/build.gradle`.
 
-## Créditos y licencia de pictogramas
+## Pictogramas
 
-Pictogramas: Sergio Palao. Origen: [ARASAAC](https://arasaac.org), Gobierno de Aragón. Licencia **CC BY-NC-SA 4.0** (uso no comercial, citando la fuente).
-Si algún día quieres vender la app, tendrás que cambiar a símbolos con otra licencia (por ejemplo Mulberry Symbols, CC BY-SA, u OpenMoji) o licenciar unos comerciales.
+Biblioteca propia en `public/pictos/kuentu/<concepto>.webp` (384 px, fondo transparente). Estilo: figura de palitos
+con cabeza blanca, contorno negro grueso y colores planos (referencia en `pictos-src/referencia/`).
+
+```bash
+npm run pictos:conceptos            # lista de conceptos desde el vocabulario → pictos-src/conceptos.json
+npm run pictos:generar -- 10        # genera con Codex hasta 10 hojas de 12 de los que falten
+npm run pictos:generar -- 1 --solo enchufe,servilleta   # rehace pictogramas puntuales
+npm run pictos:index                # actualiza src/data/kuentu-pictos.json
+```
+
+- Las hojas originales quedan en `pictos-src/hojas/` y las de revisión (con nombres) en `pictos-src/revision/`.
+- Para que una palabra use otro pictograma: `palabra@concepto` en `vocabulario.ts`; pistas de dibujo en el campo `hint` de `conceptos.json`.
+- Números y los conceptos marcados `manual` (pene, vulva: la moderación los bloquea) se hacen a mano (`pictos-src/svg/`).
+- Generados con IA (Codex/GPT Image) y revisados a mano; no derivan de ARASAAC ni de otra biblioteca.

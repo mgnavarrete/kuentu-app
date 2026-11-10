@@ -9,3 +9,11 @@ release
 # Firma de Android: nunca al repositorio (respaldarlas aparte)
 *.jks
 keystore.properties
+
+# Pictogramas: originales y pruebas (pesados; respaldar fuera de git)
+pictos-src/hojas/*.png
+pictos-src/revision/
+pictos-src/gen/
+pictos-src/muestras*/
+pictos-src/comparacion*.png
+pictos-src/generacion.log
