@@ -98,8 +98,7 @@
   "labels": [
    "esto",
    "este",
-   "esta",
-   "está"
+   "esta"
   ]
  },
  {
@@ -146,8 +145,7 @@
   "arasaac": 36480,
   "labels": [
    "ser",
-   "Ser y estar",
-   "parecer"
+   "Ser y estar"
   ]
  },
  {
@@ -241,8 +239,7 @@
   "context": "palabra núcleo",
   "arasaac": 32669,
   "labels": [
-   "venir",
-   "llamar"
+   "venir"
   ]
  },
  {
@@ -472,7 +469,8 @@
   "arasaac": 3021,
   "labels": [
    "a"
-  ]
+  ],
+  "svg": true
  },
  {
   "slug": "de",
@@ -482,7 +480,8 @@
   "arasaac": 7074,
   "labels": [
    "de"
-  ]
+  ],
+  "svg": true
  },
  {
   "slug": "en",
@@ -492,7 +491,8 @@
   "arasaac": 7034,
   "labels": [
    "en"
-  ]
+  ],
+  "svg": true
  },
  {
   "slug": "con",
@@ -502,7 +502,8 @@
   "arasaac": 7064,
   "labels": [
    "con"
-  ]
+  ],
+  "svg": true
  },
  {
   "slug": "para",
@@ -512,7 +513,8 @@
   "arasaac": 7194,
   "labels": [
    "para"
-  ]
+  ],
+  "svg": true
  },
  {
   "slug": "por",
@@ -522,7 +524,8 @@
   "arasaac": 7212,
   "labels": [
    "por"
-  ]
+  ],
+  "svg": true
  },
  {
   "slug": "sin",
@@ -532,7 +535,8 @@
   "arasaac": 7813,
   "labels": [
    "sin"
-  ]
+  ],
+  "svg": true
  },
  {
   "slug": "y",
@@ -542,7 +546,8 @@
   "arasaac": 3047,
   "labels": [
    "y"
-  ]
+  ],
+  "svg": true
  },
  {
   "slug": "o",
@@ -552,7 +557,8 @@
   "arasaac": 3037,
   "labels": [
    "o"
-  ]
+  ],
+  "svg": true
  },
  {
   "slug": "pero",
@@ -571,9 +577,7 @@
   "context": "palabra núcleo",
   "arasaac": 36719,
   "labels": [
-   "porque",
-   "por qué",
-   "¿por qué?"
+   "porque"
   ]
  },
  {
@@ -606,7 +610,8 @@
    "qué",
    "¿para qué sirve?",
    "¿qué opinas?"
-  ]
+  ],
+  "svg": true
  },
  {
   "slug": "donde",
@@ -652,6 +657,17 @@
    "cómo",
    "como"
   ]
+ },
+ {
+  "slug": "por-que",
+  "word": "por qué",
+  "cls": "quest",
+  "context": "palabra núcleo",
+  "arasaac": null,
+  "labels": [
+   "por qué"
+  ],
+  "svg": true
  },
  {
   "slug": "aqui",
@@ -822,7 +838,8 @@
   "arasaac": 3200,
   "labels": [
    "menos"
-  ]
+  ],
+  "svg": true
  },
  {
   "slug": "bien",
@@ -835,7 +852,8 @@
    "portarse bien",
    "estoy bien",
    "bien, ¿y tú?"
-  ]
+  ],
+  "svg": true
  },
  {
   "slug": "mal",
@@ -847,7 +865,8 @@
    "mal",
    "portarse mal",
    "no estoy bien"
-  ]
+  ],
+  "svg": true
  },
  {
   "slug": "algo",
@@ -877,7 +896,8 @@
   "arasaac": 3220,
   "labels": [
    "más"
-  ]
+  ],
+  "svg": true
  },
  {
   "slug": "otro",
@@ -972,7 +992,8 @@
   "arasaac": 4628,
   "labels": [
    "diferente"
-  ]
+  ],
+  "svg": true
  },
  {
   "slug": "mismo",
@@ -984,7 +1005,8 @@
    "mismo",
    "igual",
    "me da lo mismo"
-  ]
+  ],
+  "svg": true
  },
  {
   "slug": "no",
@@ -997,7 +1019,8 @@
    "eso no es lo que quería decir",
    "creo que no",
    "a mí no"
-  ]
+  ],
+  "svg": true
  },
  {
   "slug": "si-2",
@@ -1009,7 +1032,8 @@
    "sí",
    "creo que sí",
    "a mí sí"
-  ]
+  ],
+  "svg": true
  },
  {
   "slug": "hola",
@@ -1066,48 +1090,7 @@
   "context": "palabra núcleo",
   "arasaac": 39393,
   "labels": [
-   "no sé",
-   "enfrente de",
-   "así que",
-   "o sea",
-   "por eso",
-   "cada uno",
-   "lo que",
-   "tal vez",
-   "a lo mejor",
-   "por supuesto",
-   "de verdad",
-   "para qué",
-   "de quién",
-   "¿qué es eso?",
-   "¿qué hora es?",
-   "¿qué vamos a hacer?",
-   "¿dónde está?",
-   "¿dónde vamos?",
-   "¿quién es?",
-   "¿de quién es?",
-   "¿cuándo vamos?",
-   "¿cómo estás?",
-   "¿cómo se hace?",
-   "¿cómo se dice?",
-   "¿estás bien?",
-   "vamos a",
-   "tener que",
-   "ir a",
-   "es muy",
-   "me parece",
-   "no estoy",
-   "más o menos",
-   "estoy en",
-   "¿qué día es hoy?",
-   "¿qué tal?",
-   "de nada",
-   "no está aquí",
-   "de acuerdo",
-   "puede ser",
-   "yo también",
-   "yo tampoco",
-   "no estoy de acuerdo"
+   "no sé"
   ]
  },
  {
@@ -1176,9 +1159,7 @@
   "context": "carpeta «Sentimientos»",
   "arasaac": 39091,
   "labels": [
-   "Sentimientos",
-   "encantar",
-   "me encanta"
+   "Sentimientos"
   ]
  },
  {
@@ -1203,7 +1184,6 @@
   "arasaac": 4610,
   "labels": [
    "Comida",
-   "almuerzo",
    "mi comida favorita es…"
   ]
  },
@@ -1396,8 +1376,7 @@
   "context": "Palabritas › Preposiciones",
   "arasaac": 25839,
   "labels": [
-   "bajo",
-   "más despacio"
+   "bajo"
   ]
  },
  {
@@ -1408,7 +1387,8 @@
   "arasaac": 7067,
   "labels": [
    "contra"
-  ]
+  ],
+  "svg": true
  },
  {
   "slug": "desde",
@@ -1418,7 +1398,8 @@
   "arasaac": 7077,
   "labels": [
    "desde"
-  ]
+  ],
+  "svg": true
  },
  {
   "slug": "durante",
@@ -1439,7 +1420,8 @@
   "arasaac": 7765,
   "labels": [
    "entre"
-  ]
+  ],
+  "svg": true
  },
  {
   "slug": "hacia",
@@ -1449,7 +1431,8 @@
   "arasaac": 7125,
   "labels": [
    "hacia"
-  ]
+  ],
+  "svg": true
  },
  {
   "slug": "hasta",
@@ -1459,7 +1442,8 @@
   "arasaac": 7771,
   "labels": [
    "hasta"
-  ]
+  ],
+  "svg": true
  },
  {
   "slug": "segun",
@@ -1563,6 +1547,16 @@
   ]
  },
  {
+  "slug": "enfrente-de",
+  "word": "enfrente de",
+  "cls": "prep",
+  "context": "Palabritas › Lugar",
+  "arasaac": null,
+  "labels": [
+   "enfrente de"
+  ]
+ },
+ {
   "slug": "alrededor-de",
   "word": "alrededor de",
   "cls": "prep",
@@ -1591,7 +1585,8 @@
   "arasaac": 11313,
   "labels": [
    "ni"
-  ]
+  ],
+  "svg": true
  },
  {
   "slug": "sino",
@@ -1634,16 +1629,43 @@
   ]
  },
  {
+  "slug": "asi-que",
+  "word": "así que",
+  "cls": "conj",
+  "context": "Palabritas › Unir ideas",
+  "arasaac": null,
+  "labels": [
+   "así que"
+  ]
+ },
+ {
+  "slug": "o-sea",
+  "word": "o sea",
+  "cls": "conj",
+  "context": "Palabritas › Unir ideas",
+  "arasaac": null,
+  "labels": [
+   "o sea"
+  ]
+ },
+ {
+  "slug": "por-eso",
+  "word": "por eso",
+  "cls": "conj",
+  "context": "Palabritas › Unir ideas",
+  "arasaac": null,
+  "labels": [
+   "por eso"
+  ]
+ },
+ {
   "slug": "usted",
   "word": "usted",
   "cls": "pron",
   "context": "Palabritas › Personas",
   "arasaac": 6625,
   "labels": [
-   "usted",
-   "te",
-   "ti",
-   "té"
+   "usted"
   ]
  },
  {
@@ -1667,6 +1689,16 @@
   ]
  },
  {
+  "slug": "te",
+  "word": "te",
+  "cls": "pron",
+  "context": "Palabritas › Personas",
+  "arasaac": null,
+  "labels": [
+   "te"
+  ]
+ },
+ {
   "slug": "nos",
   "word": "nos",
   "cls": "pron",
@@ -1687,6 +1719,16 @@
    "mi",
    "mío",
    "mía"
+  ]
+ },
+ {
+  "slug": "ti",
+  "word": "ti",
+  "cls": "pron",
+  "context": "Palabritas › Personas",
+  "arasaac": null,
+  "labels": [
+   "ti"
   ]
  },
  {
@@ -1812,8 +1854,7 @@
   "context": "Palabritas › Alguien, algo",
   "arasaac": 5374,
   "labels": [
-   "alguno",
-   "varios"
+   "alguno"
   ]
  },
  {
@@ -1824,6 +1865,26 @@
   "arasaac": 26779,
   "labels": [
    "cualquiera"
+  ]
+ },
+ {
+  "slug": "cada-uno",
+  "word": "cada uno",
+  "cls": "pron",
+  "context": "Palabritas › Alguien, algo",
+  "arasaac": null,
+  "labels": [
+   "cada uno"
+  ]
+ },
+ {
+  "slug": "lo-que",
+  "word": "lo que",
+  "cls": "pron",
+  "context": "Palabritas › Alguien, algo",
+  "arasaac": null,
+  "labels": [
+   "lo que"
   ]
  },
  {
@@ -1857,14 +1918,23 @@
   ]
  },
  {
+  "slug": "varios",
+  "word": "varios",
+  "cls": "adj",
+  "context": "Palabritas › Cantidad",
+  "arasaac": null,
+  "labels": [
+   "varios"
+  ]
+ },
+ {
   "slug": "cada",
   "word": "cada",
   "cls": "adj",
   "context": "Palabritas › Cantidad",
   "arasaac": 4629,
   "labels": [
-   "cada",
-   "difícil"
+   "cada"
   ]
  },
  {
@@ -1962,6 +2032,26 @@
   ]
  },
  {
+  "slug": "tal-vez",
+  "word": "tal vez",
+  "cls": "adv",
+  "context": "Palabritas › Sí, no, quizás",
+  "arasaac": null,
+  "labels": [
+   "tal vez"
+  ]
+ },
+ {
+  "slug": "a-lo-mejor",
+  "word": "a lo mejor",
+  "cls": "adv",
+  "context": "Palabritas › Sí, no, quizás",
+  "arasaac": null,
+  "labels": [
+   "a lo mejor"
+  ]
+ },
+ {
   "slug": "claro",
   "word": "claro",
   "cls": "adv",
@@ -1969,6 +2059,26 @@
   "arasaac": 4604,
   "labels": [
    "claro"
+  ]
+ },
+ {
+  "slug": "por-supuesto",
+  "word": "por supuesto",
+  "cls": "adv",
+  "context": "Palabritas › Sí, no, quizás",
+  "arasaac": null,
+  "labels": [
+   "por supuesto"
+  ]
+ },
+ {
+  "slug": "de-verdad",
+  "word": "de verdad",
+  "cls": "adv",
+  "context": "Palabritas › Sí, no, quizás",
+  "arasaac": null,
+  "labels": [
+   "de verdad"
   ]
  },
  {
@@ -2018,8 +2128,7 @@
   "context": "Palabritas › Cómo",
   "arasaac": 11470,
   "labels": [
-   "mejor",
-   "importante"
+   "mejor"
   ]
  },
  {
@@ -2039,8 +2148,7 @@
   "context": "Palabritas › Cómo",
   "arasaac": 5306,
   "labels": [
-   "rápido",
-   "pronto"
+   "rápido"
   ]
  },
  {
@@ -2111,9 +2219,7 @@
   "context": "Palabritas › Cómo",
   "arasaac": 6156,
   "labels": [
-   "sin querer",
-   "no quiero",
-   "quiero comer"
+   "sin querer"
   ]
  },
  {
@@ -2137,6 +2243,17 @@
   ]
  },
  {
+  "slug": "para-que",
+  "word": "para qué",
+  "cls": "quest",
+  "context": "Preguntas › Palabras",
+  "arasaac": null,
+  "labels": [
+   "para qué"
+  ],
+  "svg": true
+ },
+ {
   "slug": "cual",
   "word": "cuál",
   "cls": "quest",
@@ -2145,7 +2262,8 @@
   "labels": [
    "cuál",
    "cuáles"
-  ]
+  ],
+  "svg": true
  },
  {
   "slug": "cuanto",
@@ -2155,7 +2273,8 @@
   "arasaac": 24731,
   "labels": [
    "cuánto"
-  ]
+  ],
+  "svg": true
  },
  {
   "slug": "cuantos",
@@ -2165,6 +2284,26 @@
   "arasaac": 7073,
   "labels": [
    "cuántos"
+  ]
+ },
+ {
+  "slug": "de-quien",
+  "word": "de quién",
+  "cls": "quest",
+  "context": "Preguntas › Palabras",
+  "arasaac": null,
+  "labels": [
+   "de quién"
+  ]
+ },
+ {
+  "slug": "que-es-eso",
+  "word": "¿qué es eso?",
+  "cls": "quest",
+  "context": "Preguntas › Frases",
+  "arasaac": null,
+  "labels": [
+   "¿qué es eso?"
   ]
  },
  {
@@ -2188,6 +2327,26 @@
   ]
  },
  {
+  "slug": "que-hora-es",
+  "word": "¿qué hora es?",
+  "cls": "quest",
+  "context": "Preguntas › Frases",
+  "arasaac": null,
+  "labels": [
+   "¿qué hora es?"
+  ]
+ },
+ {
+  "slug": "que-vamos-a-hacer",
+  "word": "¿qué vamos a hacer?",
+  "cls": "quest",
+  "context": "Preguntas › Frases",
+  "arasaac": null,
+  "labels": [
+   "¿qué vamos a hacer?"
+  ]
+ },
+ {
   "slug": "que-hay-de-comer",
   "word": "¿qué hay de comer?",
   "cls": "quest",
@@ -2198,14 +2357,83 @@
   ]
  },
  {
+  "slug": "donde-esta",
+  "word": "¿dónde está?",
+  "cls": "quest",
+  "context": "Preguntas › Frases",
+  "arasaac": null,
+  "labels": [
+   "¿dónde está?"
+  ]
+ },
+ {
+  "slug": "donde-vamos",
+  "word": "¿dónde vamos?",
+  "cls": "quest",
+  "context": "Preguntas › Frases",
+  "arasaac": null,
+  "labels": [
+   "¿dónde vamos?"
+  ]
+ },
+ {
+  "slug": "quien-es",
+  "word": "¿quién es?",
+  "cls": "quest",
+  "context": "Preguntas › Frases",
+  "arasaac": null,
+  "labels": [
+   "¿quién es?"
+  ]
+ },
+ {
   "slug": "quien-viene",
   "word": "¿quién viene?",
   "cls": "quest",
   "context": "Preguntas › Frases",
   "arasaac": 39720,
   "labels": [
-   "¿quién viene?",
+   "¿quién viene?"
+  ]
+ },
+ {
+  "slug": "de-quien-es",
+  "word": "¿de quién es?",
+  "cls": "quest",
+  "context": "Preguntas › Frases",
+  "arasaac": null,
+  "labels": [
+   "¿de quién es?"
+  ]
+ },
+ {
+  "slug": "cuando-vamos",
+  "word": "¿cuándo vamos?",
+  "cls": "quest",
+  "context": "Preguntas › Frases",
+  "arasaac": null,
+  "labels": [
+   "¿cuándo vamos?"
+  ]
+ },
+ {
+  "slug": "cuando-viene",
+  "word": "¿cuándo viene?",
+  "cls": "quest",
+  "context": "Preguntas › Frases",
+  "arasaac": null,
+  "labels": [
    "¿cuándo viene?"
+  ]
+ },
+ {
+  "slug": "como-estas",
+  "word": "¿cómo estás?",
+  "cls": "quest",
+  "context": "Preguntas › Frases",
+  "arasaac": null,
+  "labels": [
+   "¿cómo estás?"
   ]
  },
  {
@@ -2217,6 +2445,37 @@
   "labels": [
    "¿cómo te llamas?"
   ]
+ },
+ {
+  "slug": "como-se-hace",
+  "word": "¿cómo se hace?",
+  "cls": "quest",
+  "context": "Preguntas › Frases",
+  "arasaac": null,
+  "labels": [
+   "¿cómo se hace?"
+  ]
+ },
+ {
+  "slug": "como-se-dice",
+  "word": "¿cómo se dice?",
+  "cls": "quest",
+  "context": "Preguntas › Frases",
+  "arasaac": null,
+  "labels": [
+   "¿cómo se dice?"
+  ]
+ },
+ {
+  "slug": "por-que-2",
+  "word": "¿por qué?",
+  "cls": "quest",
+  "context": "Preguntas › Frases",
+  "arasaac": null,
+  "labels": [
+   "¿por qué?"
+  ],
+  "svg": true
  },
  {
   "slug": "puedo",
@@ -2318,9 +2577,7 @@
   "context": "Preguntas › Frases",
   "arasaac": 21917,
   "labels": [
-   "¿te gusta?",
-   "me gusta",
-   "no me gusta"
+   "¿te gusta?"
   ]
  },
  {
@@ -2331,6 +2588,16 @@
   "arasaac": 10369,
   "labels": [
    "¿quieres?"
+  ]
+ },
+ {
+  "slug": "estas-bien",
+  "word": "¿estás bien?",
+  "cls": "quest",
+  "context": "Preguntas › Frases",
+  "arasaac": null,
+  "labels": [
+   "¿estás bien?"
   ]
  },
  {
@@ -2351,14 +2618,7 @@
   "context": "Personas",
   "arasaac": 5441,
   "labels": [
-   "quiero ver a",
-   "quiero",
-   "pedir",
-   "ya no quiero",
-   "quiero ponerme",
-   "quiero ir a",
-   "quiero ver",
-   "quiero jugar"
+   "quiero ver a"
   ]
  },
  {
@@ -2870,8 +3130,7 @@
   "context": "subcarpeta de Personas",
   "arasaac": 37367,
   "labels": [
-   "Comunidad",
-   "carabinero"
+   "Comunidad"
   ]
  },
  {
@@ -2884,8 +3143,7 @@
   "labels": [
    "doctor",
    "doctora",
-   "Salud",
-   "salud"
+   "Salud"
   ]
  },
  {
@@ -2907,6 +3165,17 @@
   "arasaac": 2733,
   "labels": [
    "dentista"
+  ]
+ },
+ {
+  "slug": "carabinero",
+  "word": "carabinero",
+  "alt": "policía",
+  "cls": "noun",
+  "context": "Personas › Comunidad",
+  "arasaac": null,
+  "labels": [
+   "carabinero"
   ]
  },
  {
@@ -3003,6 +3272,26 @@
   ]
  },
  {
+  "slug": "quiero",
+  "word": "quiero",
+  "cls": "social",
+  "context": "Acciones",
+  "arasaac": null,
+  "labels": [
+   "quiero"
+  ]
+ },
+ {
+  "slug": "vamos-a",
+  "word": "vamos a",
+  "cls": "social",
+  "context": "Acciones",
+  "arasaac": null,
+  "labels": [
+   "vamos a"
+  ]
+ },
+ {
   "slug": "necesito",
   "word": "necesito",
   "cls": "social",
@@ -3023,6 +3312,16 @@
   ]
  },
  {
+  "slug": "no-quiero",
+  "word": "no quiero",
+  "cls": "social",
+  "context": "Acciones",
+  "arasaac": null,
+  "labels": [
+   "no quiero"
+  ]
+ },
+ {
   "slug": "necesidades",
   "word": "Necesidades",
   "alt": "dormir",
@@ -3030,8 +3329,7 @@
   "context": "subcarpeta de Acciones",
   "arasaac": 6479,
   "labels": [
-   "Necesidades",
-   "dormir"
+   "Necesidades"
   ]
  },
  {
@@ -3052,6 +3350,16 @@
   "arasaac": 32654,
   "labels": [
    "masticar"
+  ]
+ },
+ {
+  "slug": "dormir",
+  "word": "dormir",
+  "cls": "verb",
+  "context": "Acciones › Necesidades",
+  "arasaac": null,
+  "labels": [
+   "dormir"
   ]
  },
  {
@@ -3283,7 +3591,8 @@
   "context": "Acciones › Necesidades",
   "arasaac": 36149,
   "labels": [
-   "estornudar"
+   "estornudar",
+   "salud"
   ]
  },
  {
@@ -3397,8 +3706,7 @@
   "context": "subcarpeta de Acciones",
   "arasaac": 6465,
   "labels": [
-   "Moverse",
-   "correr"
+   "Moverse"
   ]
  },
  {
@@ -3430,6 +3738,16 @@
   "arasaac": 6044,
   "labels": [
    "caminar"
+  ]
+ },
+ {
+  "slug": "correr",
+  "word": "correr",
+  "cls": "verb",
+  "context": "Acciones › Moverse",
+  "arasaac": null,
+  "labels": [
+   "correr"
   ]
  },
  {
@@ -3660,8 +3978,7 @@
   "context": "subcarpeta de Acciones",
   "arasaac": 10148,
   "labels": [
-   "Manos y cosas",
-   "agarrar"
+   "Manos y cosas"
   ]
  },
  {
@@ -3672,6 +3989,17 @@
   "arasaac": null,
   "labels": [
    "dejar"
+  ]
+ },
+ {
+  "slug": "agarrar",
+  "word": "agarrar",
+  "alt": "coger",
+  "cls": "verb",
+  "context": "Acciones › Manos y cosas",
+  "arasaac": null,
+  "labels": [
+   "agarrar"
   ]
  },
  {
@@ -3832,7 +4160,6 @@
   "arasaac": 16823,
   "labels": [
    "mostrar",
-   "enseñar",
    "tengo algo que mostrarte"
   ]
  },
@@ -4149,6 +4476,16 @@
   ]
  },
  {
+  "slug": "llamar",
+  "word": "llamar",
+  "cls": "verb",
+  "context": "Acciones › Hablar y pensar",
+  "arasaac": null,
+  "labels": [
+   "llamar"
+  ]
+ },
+ {
   "slug": "gritar",
   "word": "gritar",
   "cls": "verb",
@@ -4293,6 +4630,16 @@
   ]
  },
  {
+  "slug": "ensenar",
+  "word": "enseñar",
+  "cls": "verb",
+  "context": "Acciones › Hablar y pensar",
+  "arasaac": null,
+  "labels": [
+   "enseñar"
+  ]
+ },
+ {
   "slug": "estudiar",
   "word": "estudiar",
   "cls": "verb",
@@ -4396,6 +4743,16 @@
   ]
  },
  {
+  "slug": "pedir",
+  "word": "pedir",
+  "cls": "verb",
+  "context": "Acciones › Hablar y pensar",
+  "arasaac": null,
+  "labels": [
+   "pedir"
+  ]
+ },
+ {
   "slug": "invitar",
   "word": "invitar",
   "cls": "verb",
@@ -4427,6 +4784,16 @@
   ]
  },
  {
+  "slug": "encantar",
+  "word": "encantar",
+  "cls": "verb",
+  "context": "Acciones › Sentir",
+  "arasaac": null,
+  "labels": [
+   "encantar"
+  ]
+ },
+ {
   "slug": "odiar",
   "word": "odiar",
   "cls": "verb",
@@ -4445,7 +4812,6 @@
   "arasaac": 7157,
   "labels": [
    "molestar",
-   "ruidoso",
    "me molesta"
   ]
  },
@@ -4556,7 +4922,16 @@
   "context": "Acciones › Sentir",
   "arasaac": 13354,
   "labels": [
-   "reír(se)",
+   "reír(se)"
+  ]
+ },
+ {
+  "slug": "sonreir",
+  "word": "sonreír",
+  "cls": "verb",
+  "context": "Acciones › Sentir",
+  "arasaac": null,
+  "labels": [
    "sonreír"
   ]
  },
@@ -4638,7 +5013,6 @@
   "arasaac": 11625,
   "labels": [
    "perdonar",
-   "me siento",
    "perdón",
    "lo siento",
    "disculpa"
@@ -4695,8 +5069,7 @@
   "context": "subcarpeta de Acciones",
   "arasaac": 2342,
   "labels": [
-   "Casa y escuela",
-   "cocinar"
+   "Casa y escuela"
   ]
  },
  {
@@ -4749,6 +5122,16 @@
   "arasaac": 5841,
   "labels": [
    "restar"
+  ]
+ },
+ {
+  "slug": "cocinar",
+  "word": "cocinar",
+  "cls": "verb",
+  "context": "Acciones › Casa y escuela",
+  "arasaac": null,
+  "labels": [
+   "cocinar"
   ]
  },
  {
@@ -4980,8 +5363,27 @@
   "context": "Acciones › Ser y estar",
   "arasaac": 11228,
   "labels": [
-   "deber",
-   "tarea"
+   "deber"
+  ]
+ },
+ {
+  "slug": "tener-que",
+  "word": "tener que",
+  "cls": "verb",
+  "context": "Acciones › Ser y estar",
+  "arasaac": null,
+  "labels": [
+   "tener que"
+  ]
+ },
+ {
+  "slug": "ir-a",
+  "word": "ir a",
+  "cls": "verb",
+  "context": "Acciones › Ser y estar",
+  "arasaac": null,
+  "labels": [
+   "ir a"
   ]
  },
  {
@@ -5002,6 +5404,16 @@
   "arasaac": 5431,
   "labels": [
    "empezar"
+  ]
+ },
+ {
+  "slug": "parecer",
+  "word": "parecer",
+  "cls": "verb",
+  "context": "Acciones › Ser y estar",
+  "arasaac": null,
+  "labels": [
+   "parecer"
   ]
  },
  {
@@ -5051,8 +5463,7 @@
   "context": "Acciones › Ser y estar",
   "arasaac": 36163,
   "labels": [
-   "valer",
-   "valiente"
+   "valer"
   ]
  },
  {
@@ -5073,6 +5484,36 @@
   "arasaac": 31484,
   "labels": [
    "es"
+  ]
+ },
+ {
+  "slug": "esta",
+  "word": "está",
+  "cls": "social",
+  "context": "Describir",
+  "arasaac": null,
+  "labels": [
+   "está"
+  ]
+ },
+ {
+  "slug": "es-muy",
+  "word": "es muy",
+  "cls": "social",
+  "context": "Describir",
+  "arasaac": null,
+  "labels": [
+   "es muy"
+  ]
+ },
+ {
+  "slug": "me-parece",
+  "word": "me parece",
+  "cls": "social",
+  "context": "Describir",
+  "arasaac": null,
+  "labels": [
+   "me parece"
   ]
  },
  {
@@ -5150,6 +5591,16 @@
   ]
  },
  {
+  "slug": "dificil",
+  "word": "difícil",
+  "cls": "adj",
+  "context": "Describir › Opinión",
+  "arasaac": null,
+  "labels": [
+   "difícil"
+  ]
+ },
+ {
   "slug": "genial",
   "word": "genial",
   "cls": "adj",
@@ -5181,6 +5632,16 @@
   "arasaac": 11355,
   "labels": [
    "raro"
+  ]
+ },
+ {
+  "slug": "importante",
+  "word": "importante",
+  "cls": "adj",
+  "context": "Describir › Opinión",
+  "arasaac": null,
+  "labels": [
+   "importante"
   ]
  },
  {
@@ -5416,7 +5877,16 @@
   "context": "subcarpeta de Describir",
   "arasaac": 4583,
   "labels": [
-   "Cómo está",
+   "Cómo está"
+  ]
+ },
+ {
+  "slug": "caliente",
+  "word": "caliente",
+  "cls": "adj",
+  "context": "Describir › Cómo está",
+  "arasaac": null,
+  "labels": [
    "caliente"
   ]
  },
@@ -5598,8 +6068,7 @@
   "context": "Describir › Cómo está",
   "arasaac": 26993,
   "labels": [
-   "apagado",
-   "oscuro"
+   "apagado"
   ]
  },
  {
@@ -5752,8 +6221,7 @@
   "context": "Describir › Sabor y olor",
   "arasaac": 2405,
   "labels": [
-   "cocido",
-   "garbanzos"
+   "cocido"
   ]
  },
  {
@@ -5830,6 +6298,16 @@
   ]
  },
  {
+  "slug": "ruidoso",
+  "word": "ruidoso",
+  "cls": "adj",
+  "context": "Describir › Comparar",
+  "arasaac": null,
+  "labels": [
+   "ruidoso"
+  ]
+ },
+ {
   "slug": "silencioso",
   "word": "silencioso",
   "cls": "adj",
@@ -5837,6 +6315,16 @@
   "arasaac": null,
   "labels": [
    "silencioso"
+  ]
+ },
+ {
+  "slug": "oscuro",
+  "word": "oscuro",
+  "cls": "adj",
+  "context": "Describir › Comparar",
+  "arasaac": null,
+  "labels": [
+   "oscuro"
   ]
  },
  {
@@ -5878,6 +6366,16 @@
   "arasaac": 8707,
   "labels": [
    "tímido"
+  ]
+ },
+ {
+  "slug": "valiente",
+  "word": "valiente",
+  "cls": "adj",
+  "context": "Describir › Personas",
+  "arasaac": null,
+  "labels": [
+   "valiente"
   ]
  },
  {
@@ -6197,6 +6695,26 @@
   ]
  },
  {
+  "slug": "me-siento",
+  "word": "me siento",
+  "cls": "social",
+  "context": "Sentimientos",
+  "arasaac": null,
+  "labels": [
+   "me siento"
+  ]
+ },
+ {
+  "slug": "no-estoy",
+  "word": "no estoy",
+  "cls": "social",
+  "context": "Sentimientos",
+  "arasaac": null,
+  "labels": [
+   "no estoy"
+  ]
+ },
+ {
   "slug": "feliz",
   "word": "feliz",
   "alt": "contento",
@@ -6426,6 +6944,16 @@
   ]
  },
  {
+  "slug": "mas-o-menos",
+  "word": "más o menos",
+  "cls": "social",
+  "context": "Sentimientos › Sentimientos",
+  "arasaac": null,
+  "labels": [
+   "más o menos"
+  ]
+ },
+ {
   "slug": "frases",
   "word": "Frases",
   "cls": "carpeta",
@@ -6620,8 +7148,7 @@
   "context": "Cuerpo y salud › Cuerpo",
   "arasaac": 2944,
   "labels": [
-   "lengua",
-   "lenguaje"
+   "lengua"
   ]
  },
  {
@@ -7338,6 +7865,46 @@
   ]
  },
  {
+  "slug": "quiero-comer",
+  "word": "quiero comer",
+  "cls": "social",
+  "context": "Comida",
+  "arasaac": null,
+  "labels": [
+   "quiero comer"
+  ]
+ },
+ {
+  "slug": "me-gusta",
+  "word": "me gusta",
+  "cls": "social",
+  "context": "Comida",
+  "arasaac": null,
+  "labels": [
+   "me gusta"
+  ]
+ },
+ {
+  "slug": "no-me-gusta",
+  "word": "no me gusta",
+  "cls": "social",
+  "context": "Comida",
+  "arasaac": null,
+  "labels": [
+   "no me gusta"
+  ]
+ },
+ {
+  "slug": "ya-no-quiero",
+  "word": "ya no quiero",
+  "cls": "social",
+  "context": "Comida",
+  "arasaac": null,
+  "labels": [
+   "ya no quiero"
+  ]
+ },
+ {
   "slug": "esta-rico",
   "word": "está rico",
   "cls": "social",
@@ -7357,6 +7924,17 @@
   "labels": [
    "Comidas del día",
    "desayuno"
+  ]
+ },
+ {
+  "slug": "almuerzo",
+  "word": "almuerzo",
+  "alt": "comida",
+  "cls": "noun",
+  "context": "Comida › Comidas del día",
+  "arasaac": null,
+  "labels": [
+   "almuerzo"
   ]
  },
  {
@@ -8025,8 +8603,7 @@
   "context": "Comida › Platos",
   "arasaac": 6911,
   "labels": [
-   "arroz",
-   "barra de cereal"
+   "arroz"
   ]
  },
  {
@@ -8175,6 +8752,16 @@
   "arasaac": 2448,
   "labels": [
    "lentejas"
+  ]
+ },
+ {
+  "slug": "garbanzos",
+  "word": "garbanzos",
+  "cls": "noun",
+  "context": "Comida › Platos",
+  "arasaac": null,
+  "labels": [
+   "garbanzos"
   ]
  },
  {
@@ -8402,6 +8989,16 @@
   ]
  },
  {
+  "slug": "barra-de-cereal",
+  "word": "barra de cereal",
+  "cls": "noun",
+  "context": "Comida › Snacks y dulces",
+  "arasaac": null,
+  "labels": [
+   "barra de cereal"
+  ]
+ },
+ {
   "slug": "flan",
   "word": "flan",
   "cls": "noun",
@@ -8503,6 +9100,16 @@
   "arasaac": 4732,
   "labels": [
    "bebida"
+  ]
+ },
+ {
+  "slug": "te-2",
+  "word": "té",
+  "cls": "noun",
+  "context": "Comida › Bebidas",
+  "arasaac": null,
+  "labels": [
+   "té"
   ]
  },
  {
@@ -9191,8 +9798,7 @@
   "context": "subcarpeta de Cosas",
   "arasaac": 7190,
   "labels": [
-   "Tecnología",
-   "computador"
+   "Tecnología"
   ]
  },
  {
@@ -9225,6 +9831,17 @@
   "arasaac": 28099,
   "labels": [
    "tablet"
+  ]
+ },
+ {
+  "slug": "computador",
+  "word": "computador",
+  "alt": "ordenador",
+  "cls": "noun",
+  "context": "Cosas › Tecnología",
+  "arasaac": null,
+  "labels": [
+   "computador"
   ]
  },
  {
@@ -9456,6 +10073,16 @@
   "arasaac": 4599,
   "labels": [
    "chupete"
+  ]
+ },
+ {
+  "slug": "quiero-ponerme",
+  "word": "quiero ponerme",
+  "cls": "social",
+  "context": "Ropa",
+  "arasaac": null,
+  "labels": [
+   "quiero ponerme"
   ]
  },
  {
@@ -9892,6 +10519,26 @@
   ]
  },
  {
+  "slug": "quiero-ir-a",
+  "word": "quiero ir a",
+  "cls": "social",
+  "context": "Lugares",
+  "arasaac": null,
+  "labels": [
+   "quiero ir a"
+  ]
+ },
+ {
+  "slug": "estoy-en",
+  "word": "estoy en",
+  "cls": "social",
+  "context": "Lugares",
+  "arasaac": null,
+  "labels": [
+   "estoy en"
+  ]
+ },
+ {
   "slug": "pieza",
   "word": "pieza",
   "alt": "dormitorio",
@@ -9941,8 +10588,7 @@
   "context": "Lugares › Casa",
   "arasaac": 2434,
   "labels": [
-   "jardín",
-   "jardín infantil"
+   "jardín"
   ]
  },
  {
@@ -9976,6 +10622,17 @@
   "labels": [
    "Barrio",
    "ciudad"
+  ]
+ },
+ {
+  "slug": "jardin-infantil",
+  "word": "jardín infantil",
+  "alt": "guardería",
+  "cls": "noun",
+  "context": "Lugares › Barrio",
+  "arasaac": null,
+  "labels": [
+   "jardín infantil"
   ]
  },
  {
@@ -10639,14 +11296,23 @@
   ]
  },
  {
+  "slug": "quiero-ver",
+  "word": "quiero ver",
+  "cls": "social",
+  "context": "Animales",
+  "arasaac": null,
+  "labels": [
+   "quiero ver"
+  ]
+ },
+ {
   "slug": "que-animal-es",
   "word": "¿qué animal es?",
   "cls": "social",
   "context": "Animales",
   "arasaac": 2520,
   "labels": [
-   "¿qué animal es?",
-   "pez"
+   "¿qué animal es?"
   ]
  },
  {
@@ -10670,14 +11336,23 @@
   ]
  },
  {
+  "slug": "pez",
+  "word": "pez",
+  "cls": "noun",
+  "context": "Animales › Mascotas",
+  "arasaac": null,
+  "labels": [
+   "pez"
+  ]
+ },
+ {
   "slug": "hamster",
   "word": "hámster",
   "cls": "noun",
   "context": "Animales › Mascotas",
   "arasaac": 3346,
   "labels": [
-   "hámster",
-   "cuy"
+   "hámster"
   ]
  },
  {
@@ -10687,8 +11362,7 @@
   "context": "Animales › Mascotas",
   "arasaac": 2351,
   "labels": [
-   "conejo",
-   "conejo de Pascua"
+   "conejo"
   ]
  },
  {
@@ -10719,6 +11393,17 @@
   "arasaac": 3004,
   "labels": [
    "canario"
+  ]
+ },
+ {
+  "slug": "cuy",
+  "word": "cuy",
+  "alt": "cobaya",
+  "cls": "noun",
+  "context": "Animales › Mascotas",
+  "arasaac": null,
+  "labels": [
+   "cuy"
   ]
  },
  {
@@ -11544,6 +12229,26 @@
   "arasaac": 34383,
   "labels": [
    "está nublado"
+  ]
+ },
+ {
+  "slug": "que-dia-es-hoy",
+  "word": "¿qué día es hoy?",
+  "cls": "social",
+  "context": "Tiempo",
+  "arasaac": null,
+  "labels": [
+   "¿qué día es hoy?"
+  ]
+ },
+ {
+  "slug": "pronto",
+  "word": "pronto",
+  "cls": "adv",
+  "context": "Tiempo › Cuándo",
+  "arasaac": null,
+  "labels": [
+   "pronto"
   ]
  },
  {
@@ -12499,6 +13204,17 @@
   ]
  },
  {
+  "slug": "tarea",
+  "word": "tarea",
+  "alt": "deberes",
+  "cls": "noun",
+  "context": "Escuela › En clase",
+  "arasaac": null,
+  "labels": [
+   "tarea"
+  ]
+ },
+ {
   "slug": "prueba",
   "word": "prueba",
   "alt": "examen",
@@ -12636,6 +13352,17 @@
   ]
  },
  {
+  "slug": "lenguaje",
+  "word": "lenguaje",
+  "alt": "lengua",
+  "cls": "noun",
+  "context": "Escuela › Ramos",
+  "arasaac": null,
+  "labels": [
+   "lenguaje"
+  ]
+ },
+ {
   "slug": "ciencias",
   "word": "ciencias",
   "cls": "noun",
@@ -12685,6 +13412,16 @@
   "arasaac": 24471,
   "labels": [
    "religión"
+  ]
+ },
+ {
+  "slug": "quiero-jugar",
+  "word": "quiero jugar",
+  "cls": "social",
+  "context": "Diversión",
+  "arasaac": null,
+  "labels": [
+   "quiero jugar"
   ]
  },
  {
@@ -12746,8 +13483,7 @@
   "context": "Diversión › Juguetes",
   "arasaac": 2340,
   "labels": [
-   "autitos",
-   "cocinita"
+   "autitos"
   ]
  },
  {
@@ -12865,6 +13601,17 @@
   "arasaac": 26897,
   "labels": [
    "títeres"
+  ]
+ },
+ {
+  "slug": "cocinita",
+  "word": "cocinita",
+  "alt": "cocina de juguete",
+  "cls": "noun",
+  "context": "Diversión › Juguetes",
+  "arasaac": null,
+  "labels": [
+   "cocinita"
   ]
  },
  {
@@ -13197,6 +13944,17 @@
   ]
  },
  {
+  "slug": "mas-despacio",
+  "word": "más despacio",
+  "alt": "bajo",
+  "cls": "social",
+  "context": "Diversión › Tele y música",
+  "arasaac": null,
+  "labels": [
+   "más despacio"
+  ]
+ },
+ {
   "slug": "velas",
   "word": "velas",
   "alt": "vela",
@@ -13304,6 +14062,17 @@
   "arasaac": 25441,
   "labels": [
    "Semana Santa"
+  ]
+ },
+ {
+  "slug": "conejo-de-pascua",
+  "word": "conejo de Pascua",
+  "alt": "conejo",
+  "cls": "noun",
+  "context": "Diversión › Fiestas",
+  "arasaac": null,
+  "labels": [
+   "conejo de Pascua"
   ]
  },
  {
@@ -13432,6 +14201,17 @@
   ]
  },
  {
+  "slug": "que-tal",
+  "word": "¿qué tal?",
+  "alt": "qué tal",
+  "cls": "social",
+  "context": "Plática › Saludos",
+  "arasaac": null,
+  "labels": [
+   "¿qué tal?"
+  ]
+ },
+ {
   "slug": "hasta-manana",
   "word": "hasta mañana",
   "cls": "social",
@@ -13449,6 +14229,16 @@
   "arasaac": 6936,
   "labels": [
    "bienvenido"
+  ]
+ },
+ {
+  "slug": "de-nada",
+  "word": "de nada",
+  "cls": "social",
+  "context": "Plática › Cortesía",
+  "arasaac": null,
+  "labels": [
+   "de nada"
   ]
  },
  {
@@ -13496,6 +14286,17 @@
   ]
  },
  {
+  "slug": "no-esta-aqui",
+  "word": "no está aquí",
+  "alt": "no está",
+  "cls": "social",
+  "context": "Plática › Quiero decir algo",
+  "arasaac": null,
+  "labels": [
+   "no está aquí"
+  ]
+ },
+ {
   "slug": "lo-voy-a-deletrear",
   "word": "lo voy a deletrear",
   "alt": "deletrear",
@@ -13504,6 +14305,27 @@
   "arasaac": null,
   "labels": [
    "lo voy a deletrear"
+  ]
+ },
+ {
+  "slug": "de-acuerdo",
+  "word": "de acuerdo",
+  "cls": "social",
+  "context": "Plática › Responder",
+  "arasaac": null,
+  "labels": [
+   "de acuerdo"
+  ]
+ },
+ {
+  "slug": "puede-ser",
+  "word": "puede ser",
+  "alt": "quizás",
+  "cls": "social",
+  "context": "Plática › Responder",
+  "arasaac": null,
+  "labels": [
+   "puede ser"
   ]
  },
  {
@@ -13561,6 +14383,37 @@
   ]
  },
  {
+  "slug": "me-encanta",
+  "word": "me encanta",
+  "alt": "encantar",
+  "cls": "social",
+  "context": "Plática › Opinar",
+  "arasaac": null,
+  "labels": [
+   "me encanta"
+  ]
+ },
+ {
+  "slug": "yo-tambien",
+  "word": "yo también",
+  "cls": "social",
+  "context": "Plática › Opinar",
+  "arasaac": null,
+  "labels": [
+   "yo también"
+  ]
+ },
+ {
+  "slug": "yo-tampoco",
+  "word": "yo tampoco",
+  "cls": "social",
+  "context": "Plática › Opinar",
+  "arasaac": null,
+  "labels": [
+   "yo tampoco"
+  ]
+ },
+ {
   "slug": "tienes-razon",
   "word": "tienes razón",
   "alt": "razón",
@@ -13569,6 +14422,17 @@
   "arasaac": 5739,
   "labels": [
    "tienes razón"
+  ]
+ },
+ {
+  "slug": "no-estoy-de-acuerdo",
+  "word": "no estoy de acuerdo",
+  "alt": "desacuerdo",
+  "cls": "social",
+  "context": "Plática › Opinar",
+  "arasaac": null,
+  "labels": [
+   "no estoy de acuerdo"
   ]
  },
  {

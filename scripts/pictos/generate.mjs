@@ -58,7 +58,9 @@ For each cell, draw the most concrete, instantly recognizable depiction of the w
 ${cells}${empty}`
 }
 
-function newestCodexImage(since) {
+function newestCodexImage(since, output = '') {
+  // Debe aparecer en la respuesta de esta ejecución (Codex informa la ruta de la imagen que generó).
+  const mentioned = (p) => output.includes(p.split('/').pop())
   const dir = join(homedir(), '.codex/generated_images')
   if (!existsSync(dir)) return null
   const files = []
@@ -71,7 +73,7 @@ function newestCodexImage(since) {
     }
   }
   walk(dir)
-  return files.sort((a, b) => b[0] - a[0])[0]?.[1] ?? null
+  return files.sort((a, b) => b[0] - a[0]).map((f) => f[1]).find(mentioned) ?? null
 }
 
 const log = (m) => {
@@ -99,7 +101,9 @@ for (let s = 0; s < sheets && pending.length; s++) {
     ['exec', '--skip-git-repo-check', '-s', 'workspace-write', '-C', genDir, '-i', REF, '--', prompt(batch)],
     { encoding: 'utf8', timeout: 15 * 60 * 1000, maxBuffer: 64 * 1024 * 1024 },
   )
-  let img = existsSync(target) && statSync(target).mtimeMs > start ? target : newestCodexImage(start)
+  // Solo se acepta la imagen que Codex copió aquí, o una nueva en generated_images si Codex terminó bien
+  // (si falló, ahí puede haber imágenes de otras sesiones de Codex).
+  let img = existsSync(target) && statSync(target).mtimeMs > start ? target : r.status === 0 ? newestCodexImage(start, r.stdout) : null
   if (!img) {
     failures++
     log(`${name}: ERROR sin imagen (código ${r.status}) ${(r.stderr || r.stdout || '').slice(-400).replace(/\s+/g, ' ')}`)

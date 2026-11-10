@@ -17,6 +17,16 @@ const SVG = new Set(
   'cero uno dos tres cuatro cinco seis siete ocho nueve diez once doce trece catorce quince dieciséis diecisiete dieciocho diecinueve veinte treinta cuarenta cincuenta cien mil'.split(' '),
 )
 
+/** Palabras que el mapeo antiguo agrupó mal con otra: cada una tiene su propio pictograma. */
+const SPLIT = new Set(
+  ["está", "parecer", "encantar", "me encanta", "almuerzo", "te", "ti", "té", "no quiero", "quiero comer", "me gusta", "no me gusta", "quiero", "pedir", "ya no quiero", "quiero ponerme", "quiero ir a", "quiero ver", "quiero jugar",  "enseñar", "ruidoso", "me siento", "llamar", "difícil", "importante", "pronto", "¿cuándo viene?", "carabinero", "dormir", "correr", "agarrar", "cocinar", "tarea", "valiente", "caliente", "oscuro", "garbanzos", "lenguaje", "barra de cereal", "computador", "jardín infantil", "pez", "cuy", "cocinita", "más despacio", "varios", "sonreír", "conejo de pascua", "por qué", "¿por qué?", "enfrente de", "así que", "o sea", "por eso", "cada uno", "lo que", "tal vez", "a lo mejor", "por supuesto", "de verdad", "para qué", "de quién", "¿qué es eso?", "¿qué hora es?", "¿qué vamos a hacer?", "¿dónde está?", "¿dónde vamos?", "¿quién es?", "¿de quién es?", "¿cuándo vamos?", "¿cómo estás?", "¿cómo se hace?", "¿cómo se dice?", "¿estás bien?", "vamos a", "tener que", "ir a", "es muy", "me parece", "no estoy", "más o menos", "estoy en", "¿qué día es hoy?", "¿qué tal?", "de nada", "no está aquí", "de acuerdo", "puede ser", "yo también", "yo tampoco", "no estoy de acuerdo"],
+)
+
+/** Palabras gramaticales: símbolos dibujados a mano (letras, +, ✓, ✗, ?, cajas con flechas), como los que ya conocen los niños. */
+const SYMBOLS = new Set(
+  'a y o ni más menos sí no bien mal mismo diferente qué cuál cuánto de en con para por sin desde hacia hasta contra entre'.split(' ').concat(['por qué', '¿por qué?', 'para qué']),
+)
+
 /** No se pueden generar con IA (la moderación las bloquea): se dibujan a mano. */
 const MANUAL = new Set(['pene', 'vulva'])
 
@@ -40,14 +50,16 @@ const concepts = new Map()
 const used = new Set()
 for (const r of rows) {
   const id = ids[r.label.toLowerCase()]
-  const key = r.picto ? `p${r.picto}` : typeof id === 'number' ? `a${id}` : `l${r.label.toLowerCase()}`
-  let c = concepts.get(key)
+  const own = SPLIT.has(r.label.toLowerCase())
+  const key = r.picto ? `p${r.picto}` : typeof id === 'number' && !own ? `a${id}` : `l${r.label.toLowerCase()}`
+  // "palabra@concepto" reutiliza el concepto existente con ese nombre, si ya hay uno.
+  let c = concepts.get(key) ?? (r.picto ? [...concepts.values()].find((x) => x.slug === r.picto) : undefined)
   if (!c) {
     let s = r.picto ?? (slug(r.label) || 'x')
     while (used.has(s)) s += '-2'
     used.add(s)
-    c = { slug: s, word: r.label, alt: r.alt, cls: r.cls, context: r.context, arasaac: typeof id === 'number' && !r.picto ? id : null, labels: [] }
-    if (SVG.has(r.label.toLowerCase()) && !r.picto) c.svg = true
+    c = { slug: s, word: r.label, alt: r.alt, cls: r.cls, context: r.context, arasaac: typeof id === 'number' && !r.picto && !own ? id : null, labels: [] }
+    if ((SVG.has(r.label.toLowerCase()) && !r.picto) || SYMBOLS.has(r.label.toLowerCase())) c.svg = true
     if (MANUAL.has(r.label.toLowerCase())) c.manual = true
     if (previous[s]?.hint) c.hint = previous[s].hint
     concepts.set(key, c)
