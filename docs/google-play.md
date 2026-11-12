@@ -25,7 +25,7 @@ Archivo a subir: `release/Kuentu-1.0.0.aab` (se genera con `npm run android:aab`
 > • Funciona sin internet. Cuenta opcional para sincronizar el tablero entre dispositivos.
 > • Sin publicidad y sin compras.
 
-- **Categoría:** Educación (o Comunicación). **Correo de contacto:** (el mismo de la política de privacidad).
+- **Categoría:** Educación (o Comunicación). **Correo de contacto:** mnavarrete@minttu.cl.
 - **Política de privacidad:** https://kuentu.minttu.cl/privacidad.html
 - **Gráficos:** ícono 512×512 (`public/icon-512.png`), gráfico destacado 1024×500, mínimo 2 capturas de teléfono
   y, para tablets, 2 capturas de 7" y 10" (se toman desde la app instalada).
